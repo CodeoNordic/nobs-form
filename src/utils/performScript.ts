@@ -3,10 +3,9 @@ import { info, warn } from '@utils/log';
 import isDevMode from './isDevMode';
 export const loadCallbacks: VoidFunction[] = [];
 
-// TODO: Rename Example to your namespace
 /**
  * Performs a FileMaker script
- * @param key The key of the script as per `Example.Config`
+ * @param key The key of the script as per `Form.Config`
  * @param param The parameter to pass to the script
  * @param option The option to pass to the script
  * @param directScriptName Whether to use the key as the script name directly
@@ -17,7 +16,7 @@ export const loadCallbacks: VoidFunction[] = [];
  * ```
  */
 export default function performScript(
-    key: string & keyof Example.Config['scriptNames'] | (string & {}),
+    key: string & keyof Form.Config['scriptNames'] | (string & {}),
     param?: any,
     option?: Parameters<typeof window['FileMaker']['PerformScriptWithOption']>[2],
     directScriptName: boolean = false
@@ -34,7 +33,7 @@ export default function performScript(
     try {
         const parsedParam = typeof param === 'undefined'? param:JSON.stringify(param);
         
-        const scriptName = directScriptName? key: window._config?.scriptNames?.[key as keyof Example.Config['scriptNames']];
+        const scriptName = directScriptName? key: window._config?.scriptNames?.[key as keyof Form.Config['scriptNames']];
         if (typeof scriptName !== 'string') {
             const msg = `Script name of the key '${key}' was not found in the config`;
             (key !== 'onJsError') && warn(msg);

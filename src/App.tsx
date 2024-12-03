@@ -1,4 +1,4 @@
-import Example from '@components/Example';
+import Form from '@components/Form';
 import { useConfig } from '@context/Config';
 
 const App: React.FC = () => {
@@ -6,8 +6,7 @@ const App: React.FC = () => {
 
     if (!config) return null;
 
-    // TODO: Change to your own component
-    return <Example />
+    return <Form />
 }
 
 export default App;
