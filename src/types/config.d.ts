@@ -1,7 +1,7 @@
 declare global {
     namespace Form {
         interface Config {
-            value: string;
+            text?: string;
 
             scriptNames: Form.ScriptNames;
             

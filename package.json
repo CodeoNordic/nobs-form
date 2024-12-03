@@ -31,7 +31,8 @@
   },
   "browserslist": "> 0.5%, last 2 versions, not IE 9-11, not dead",
   "dependencies": {
-    "open": "8.2.1"
+    "open": "8.2.1",
+    "survey-creator-react": "^1.12.12"
   },
   "devDependencies": {
     "@parcel/optimizer-data-url": "^2.12.0",
