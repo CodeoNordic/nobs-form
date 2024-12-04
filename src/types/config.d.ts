@@ -1,7 +1,8 @@
 declare global {
     namespace Form {
         interface Config {
-            text?: string;
+            // The form data, in json format
+            value?: string;
 
             scriptNames: Form.ScriptNames;
             

@@ -1,5 +1,7 @@
 import { useConfigState } from "@context/Config";
-import { SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
+import performScript from "@utils/performScript";
+import { editorLocalization, SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
+import "survey-creator-core/i18n/norwegian";
 
 const creatorOptions = {
     showLogicTab: true,
@@ -13,13 +15,22 @@ const Form: FC = () => {
 
     const creator = new SurveyCreator(creatorOptions);
 
-    if (config.text) {
-        creator.text = config.text;
+    if (config.value) {
+        creator.text = config.value;
     }
 
+    editorLocalization.currentLocale = "nb";
+
+    creator.locale = "nb";
+
     creator.saveSurveyFunc = (saveNo: number, callback: (saveNo: number, success: boolean) => void): void => { 
-        console.log('saveSurveyFunc', saveNo, creator.text);
-        setConfig({ ...config, text: creator.text });
+        if (config.scriptNames.autoSave) {
+            performScript("autoSave", {value: creator.text});
+            setConfig({ ...config, value: creator.text });
+        } else {
+            setConfig({ ...config, value: creator.text });
+            console.log('saveSurveyFunc', saveNo, creator.text);
+        }
         callback(saveNo, true);
     }
 
