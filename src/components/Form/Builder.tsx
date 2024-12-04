@@ -2,7 +2,7 @@ import { useConfigState } from "@context/Config";
 import performScript from "@utils/performScript";
 import { editorLocalization, SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
 import "survey-creator-core/i18n";
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { surveyLocalization } from "survey-react-ui";
 import { warn } from "@utils/log";
 
@@ -17,24 +17,20 @@ const FormBuilder: FC = () => {
     if (!config) return null;
 
     const creator = useMemo(() => {
-        const setLocales = () => {
-            if (config.locale !== "en" && config.locale !== "no") {
-                warn(`Invalid locale "${config.locale}", defaulting to "no"`);
-                config.locale = "no";
-            }
-        
-            // Because it's "nb" instead of "no"
-            const locale = config.locale === "en" ? "en" : "nb";
-            editorLocalization.defaultLocale = locale;
-            editorLocalization.currentLocale = locale;
-        
-            // Normal here
-            surveyLocalization.defaultLocale = config.locale;
-            surveyLocalization.currentLocale = config.locale;
-            surveyLocalization.supportedLocales = ["no", "en"];
-        };
+        if (config.locale !== "en" && config.locale !== "no") {
+            warn(`Invalid locale "${config.locale}", defaulting to "no"`);
+            config.locale = "no";
+        }
     
-        setLocales();
+        // Because it's "nb" instead of "no"
+        const locale = config.locale === "en" ? "en" : "nb";
+        editorLocalization.defaultLocale = locale;
+        editorLocalization.currentLocale = locale;
+    
+        // Normal here
+        surveyLocalization.defaultLocale = config.locale;
+        surveyLocalization.currentLocale = config.locale;
+        surveyLocalization.supportedLocales = ["no", "en"];
     
         const newCreator = new SurveyCreator(creatorOptions);
     

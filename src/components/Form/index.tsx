@@ -12,6 +12,8 @@ const Form: FC = () => {
         warn("Invalid form type, defaulting to viewer");
     }
 
+    console.log("render form");
+
     return config.type === "builder" ? <FormBuilder /> : <FormViewer />;
 }
 
