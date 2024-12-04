@@ -32,7 +32,8 @@
   "browserslist": "> 0.5%, last 2 versions, not IE 9-11, not dead",
   "dependencies": {
     "open": "8.2.1",
-    "survey-creator-react": "^1.12.12"
+    "survey-creator-react": "^1.12.12",
+    "survey-react-ui": "^1.12.12"
   },
   "devDependencies": {
     "@parcel/optimizer-data-url": "^2.12.0",
@@ -68,7 +69,7 @@
     "rgba-to-rgb": "^1.0.2",
     "rimraf": "^5.0.5",
     "tinycolor2": "^1.6.0",
-    "typescript": "^5.4.5",
+    "typescript": "^5.7.2",
     "util": "^0.12.5",
     "uuid": "^9.0.1"
   }

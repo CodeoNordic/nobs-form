@@ -21,15 +21,12 @@ const Form: FC = () => {
 
     editorLocalization.currentLocale = "nb";
 
-    creator.locale = "nb";
-
     creator.saveSurveyFunc = (saveNo: number, callback: (saveNo: number, success: boolean) => void): void => { 
-        if (config.scriptNames.autoSave) {
+        if (config.scriptNames?.autoSave) {
             performScript("autoSave", {value: creator.text});
             setConfig({ ...config, value: creator.text });
         } else {
             setConfig({ ...config, value: creator.text });
-            console.log('saveSurveyFunc', saveNo, creator.text);
         }
         callback(saveNo, true);
     }

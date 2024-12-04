@@ -4,7 +4,7 @@ declare global {
             // The form data, in json format
             value?: string;
 
-            scriptNames: Form.ScriptNames;
+            scriptNames?: Form.ScriptNames;
             
             ignoreInfo: boolean;
             ignoreWarnings: boolean;
