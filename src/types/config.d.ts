@@ -4,6 +4,10 @@ declare global {
             // The form data, in json format
             value?: string;
 
+            // The current answers to the form, updated along the way. 
+            // Use to continue where the user left off 
+            answerData?: string; 
+
             // The version of the form
             type: 'viewer'|'builder';
 

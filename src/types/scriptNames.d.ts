@@ -4,6 +4,9 @@ declare global {
             /** Script to be ran when autosave triggers */
             autoSave?: string;
 
+            /** Script to be ran when a question is answered */
+            onChange?: string;
+
             /** Script to run when form is submitted */
             onSubmit?: string;
 

@@ -19,7 +19,7 @@ const FormBuilder: FC = () => {
     const creator = useMemo(() => {
         if (config.locale !== "en" && config.locale !== "no") {
             warn(`Invalid locale "${config.locale}", defaulting to "no"`);
-            config.locale = "no";
+            setConfig({ ...config, locale: "no" });
         }
     
         // Because it's "nb" instead of "no"
