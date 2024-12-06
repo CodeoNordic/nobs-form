@@ -3,6 +3,7 @@ import { Model, Survey } from "survey-react-ui";
 import "survey-core/i18n";
 import performScript from "@utils/performScript";
 import { useMemo } from "react";
+import { warn } from "@utils/log";
 
 
 const FormViewer: FC = () => {
@@ -15,10 +16,15 @@ const FormViewer: FC = () => {
 
         const prevData = config.answerData;
         if (prevData) {
-            const data = JSON.parse(prevData);
-            newSurvey.data = data;
-            if (data.pageNo) {
-                newSurvey.currentPageNo = data.pageNo;
+            try {
+                const data = JSON.parse(prevData);
+                newSurvey.data = data;
+
+                if (data.pageNo) {
+                    newSurvey.currentPageNo = data.pageNo;
+                }
+            } catch (e) {
+                warn("Failed to parse answer data, will init with empty data.", e);
             }
         }
 

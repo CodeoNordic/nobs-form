@@ -4,11 +4,11 @@ import { useCreateMethod } from '@utils/createMethod';
 import { useConfigState } from '@context/Config';
 
 const typeMap: Array<(v: any) => any> = [
-    v => String(v), // JSONString = 1
+    v => (typeof v === 'string') ? v : JSON.stringify(v), // JSONString = 1
     v => Number(v), // JSONNumber = 2
-    v => ((typeof v === 'object')? v: {}), // JSONObject = 3
-    v => ((v instanceof Array)? v: []), // JSONArray = 4
-    (v) => Boolean(v), // JSONBoolean = 5
+    v => (typeof v === 'object' && !Array.isArray(v)) ? v : {}, // JSONObject = 3
+    v => Array.isArray(v) ? v : [], // JSONArray = 4
+    v => Boolean(v), // JSONBoolean = 5
     () => null // JSONNull = 6
 ];
 
