@@ -1,7 +1,6 @@
-import set from 'lodash.set';
-
 import { useCreateMethod } from '@utils/createMethod';
 import { useConfigState } from '@context/Config';
+import set from 'lodash.set';
 
 const typeMap: Array<(v: any) => any> = [
     v => (typeof v === 'string') ? v : JSON.stringify(v), // JSONString = 1

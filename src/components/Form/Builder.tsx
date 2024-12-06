@@ -1,10 +1,10 @@
+import { editorLocalization, SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
+import { surveyLocalization } from "survey-react-ui";
 import { useConfigState } from "@context/Config";
 import performScript from "@utils/performScript";
-import { editorLocalization, SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
+import { warn } from "@utils/log";
 import "survey-creator-core/i18n";
 import { useMemo } from "react";
-import { surveyLocalization } from "survey-react-ui";
-import { warn } from "@utils/log";
 
 const creatorOptions = {
     showLogicTab: true,
@@ -16,7 +16,9 @@ const FormBuilder: FC = () => {
 
     if (!config) return null;
 
+    // useMemo so you can choose when to re-render
     const creator = useMemo(() => {
+        // Check if locale is valid
         if (config.locale !== "en" && config.locale !== "no") {
             warn(`Invalid locale "${config.locale}", defaulting to "no"`);
             setConfig({ ...config, locale: "no" });
@@ -38,6 +40,7 @@ const FormBuilder: FC = () => {
             newCreator.text = config.value;
         }
     
+        // Autosave function
         newCreator.saveSurveyFunc = (
             saveNo: number,
             callback: (no: number, isSuccess: boolean) => void

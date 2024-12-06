@@ -1,6 +1,6 @@
 import { useConfig } from "@context/Config";
-import FormViewer from "./Viewer";
 import FormBuilder from "./Builder";
+import FormViewer from "./Viewer";
 import { warn } from "@utils/log";
 
 const Form: FC = () => {

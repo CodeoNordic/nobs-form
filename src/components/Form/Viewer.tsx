@@ -1,9 +1,9 @@
 import { useConfigState } from "@context/Config";
-import { Model, Survey } from "survey-react-ui";
-import "survey-core/i18n";
 import performScript from "@utils/performScript";
-import { useMemo } from "react";
+import { Model, Survey } from "survey-react-ui";
 import { warn } from "@utils/log";
+import { useMemo } from "react";
+import "survey-core/i18n";
 
 
 const FormViewer: FC = () => {
@@ -11,9 +11,11 @@ const FormViewer: FC = () => {
 
     if (!config || !config.value) return null;
 
+    // useMemo so you can choose when to re-render
     const survey = useMemo(() => {
         const newSurvey = new Model(config.value);
 
+        // Attempt to add existing answer data
         const prevData = config.answerData;
         if (prevData) {
             try {
@@ -24,12 +26,13 @@ const FormViewer: FC = () => {
                     newSurvey.currentPageNo = data.pageNo;
                 }
             } catch (e) {
-                warn("Failed to parse answer data, will init with empty data.", e);
+                warn("Failed to parse answer data, will start with empty data.", e);
             }
         }
 
         newSurvey.locale = config.locale;
 
+        // Save answer data on answer and page change
         const saveAnswerData = (result: Model) => {
             const data = result.data;
             data.pageNo = result.currentPageNo;
