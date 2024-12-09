@@ -2,9 +2,9 @@ import { editorLocalization, SurveyCreator, SurveyCreatorComponent } from "surve
 import { surveyLocalization } from "survey-react-ui";
 import { useConfigState } from "@context/Config";
 import performScript from "@utils/performScript";
+import { useEffect, useMemo } from "react";
 import { warn } from "@utils/log";
 import "survey-creator-core/i18n";
-import { useMemo } from "react";
 
 const creatorOptions = {
     showLogicTab: true,
@@ -16,14 +16,16 @@ const FormBuilder: FC = () => {
 
     if (!config) return null;
 
-    // useMemo so you can choose when to re-render
-    const creator = useMemo(() => {
-        // Check if locale is valid
+    // Check if locale is valid
+    useEffect(() => {
         if (config.locale !== "en" && config.locale !== "no") {
             warn(`Invalid locale "${config.locale}", defaulting to "no"`);
             setConfig({ ...config, locale: "no" });
         }
-    
+    }, [config.locale, setConfig]);
+
+    // useMemo so you can choose when to re-render
+    const creator = useMemo(() => {
         // Because it's "nb" instead of "no"
         const locale = config.locale === "en" ? "en" : "nb";
         editorLocalization.defaultLocale = locale;

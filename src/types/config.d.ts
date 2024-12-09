@@ -8,8 +8,11 @@ declare global {
             // Use to continue where the user left off 
             answerData?: string; 
 
+            // Array of all answers to the form, used for visualizing the form
+            answers?: string;
+
             // The version of the form
-            type: 'viewer'|'builder';
+            type: 'viewer'|'builder'|'visualizer';
 
             // The language of the form, can be more if needed
             locale: "no"|"en";

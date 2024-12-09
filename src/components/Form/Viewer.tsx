@@ -9,7 +9,12 @@ import "survey-core/i18n";
 const FormViewer: FC = () => {
     const [config, setConfig] = useConfigState();
 
-    if (!config || !config.value) return null;
+    if (!config) return null;
+
+    if (!config.value) {
+        warn("No form value provided, cannot render form.");
+        return null
+    }
 
     // useMemo so you can choose when to re-render
     const survey = useMemo(() => {
@@ -53,6 +58,18 @@ const FormViewer: FC = () => {
         });
 
         newSurvey.onComplete.add((result) => {
+            let prevAnswers = JSON.parse(config.answers || "[]");
+
+            if (!prevAnswers || !Array.isArray(prevAnswers)) {
+                warn("Failed to parse previous answers, will start with empty array.");
+                prevAnswers = [];
+            }
+
+            setConfig({ 
+                ...config, 
+                answers: JSON.stringify([...prevAnswers, result.data]) 
+            });
+
             if (config.scriptNames?.onSubmit) {
                 performScript("onSubmit", { result: result.data });
             }
