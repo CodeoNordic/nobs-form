@@ -1,11 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { loadCallbacks } from '@utils/performScript';
+import { warn } from '@utils/log';
 
 const defaultConfig: Partial<Form.Config> = {
     type: 'viewer',
     locale: 'no',
 };
-
 
 // Parses the JSON from FileMaker into a readable config
 const parseConfig = (cfg: string = '{}') => {
@@ -38,9 +38,40 @@ window.init = cfg => {
     runLoadCallbacks();
 };
 
+const validateConfig = (config: any): Form.Config => {
+    const validTypes = ['builder', 'viewer', 'visualizer'];
+    const validLocales = ['en', 'no'];
+
+    const validatedConfig = { ...defaultConfig, ...config };
+  
+    // Validate 'type'
+    if (!validTypes.includes(validatedConfig.type)) {
+      warn(`Invalid form type "${validatedConfig.type}", defaulting to "${defaultConfig.type}"`);
+      validatedConfig.type = defaultConfig.type;
+    }
+  
+    // Validate 'locale'
+    if (!validLocales.includes(validatedConfig.locale)) {
+      warn(`Invalid locale "${validatedConfig.locale}", defaulting to "${defaultConfig.locale}"`);
+      validatedConfig.locale = defaultConfig.locale;
+    }
+  
+    // Add additional validation
+  
+    return validatedConfig;
+  };
+
 const ConfigContext = createContext<State<Form.Config|null>>([null, () => {}]);
 const ConfigProvider: FC = ({ children }) => {
-    const [config, setConfig] = useState<Form.Config|null>(null);
+    const [config, setConfigState] = useState<Form.Config | null>(null);
+
+    // Validate before setting
+    const setConfig = (newConfig: React.SetStateAction<Form.Config | null>) => {
+        setConfigState((prevConfig) => {
+            const updatedConfig = typeof newConfig === 'function' ? newConfig(prevConfig) : newConfig;
+            return updatedConfig ? validateConfig(updatedConfig) : null;
+        });
+    };
 
     useEffect(() => {
         if (window._config !== undefined) setConfig(window._config);

@@ -1,12 +1,12 @@
 import { VisualizationPanel } from "survey-analytics";
-import { useConfigState } from "@context/Config";
 import { useEffect, useState } from "react";
+import { useConfig } from "@context/Config";
 import { Model } from "survey-react-ui";
 import { warn } from "@utils/log";
 import "survey-core/i18n";
 
 const FormVisualizer: FC = () => {
-    const [config, setConfig] = useConfigState();
+    const config = useConfig();
     const [survey, setSurvey] = useState<Model | null>(null);
 
     if (!config) return null;
@@ -24,15 +24,23 @@ const FormVisualizer: FC = () => {
     useEffect(() => {
         if (!survey || !config.answers) return;
 
+        console.log("recreate visualizer");
+
         const newVisualizer = new VisualizationPanel(
             survey.getAllQuestions(),
             JSON.parse(config.answers),
             {} // options, add to config later
         );
 
+        newVisualizer.locale = config.locale;
+
         newVisualizer.render("visualizer");
-    }, [survey, config.answers]);
-    
+
+        return () => {
+            document.getElementById("visualizer")!.innerHTML = "";
+        }
+    }, [survey, config.answers, config.locale]);
+
     console.log("render visualizer");
 
     return <div id="visualizer" />;
