@@ -1,5 +1,5 @@
 import { VisualizationPanel } from "survey-analytics";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useConfig } from "@context/Config";
 import { Model } from "survey-react-ui";
 import { warn } from "@utils/log";
@@ -7,7 +7,6 @@ import "survey-core/i18n";
 
 const FormVisualizer: FC = () => {
     const config = useConfig();
-    const [survey, setSurvey] = useState<Model | null>(null);
 
     if (!config) return null;
 
@@ -16,9 +15,9 @@ const FormVisualizer: FC = () => {
         return null;
     }
 
-    if (!survey) {
-        setSurvey(new Model(config.value));
-    }
+    const survey = useMemo(() => {
+        return new Model(config.value);
+    }, [config.value]);
 
     // useEffect so you can choose when to re-render
     useEffect(() => {
@@ -37,7 +36,10 @@ const FormVisualizer: FC = () => {
         newVisualizer.render("visualizer");
 
         return () => {
-            document.getElementById("visualizer")!.innerHTML = "";
+            const visualizerElement = document.getElementById("visualizer");
+            if (visualizerElement) {
+                visualizerElement.innerHTML = "";
+            }
         }
     }, [survey, config.answers, config.locale]);
 
