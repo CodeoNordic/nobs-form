@@ -7,7 +7,8 @@ import { useMemo } from "react";
 
 const creatorOptions = {
     showLogicTab: true,
-    isAutoSave: true
+    isAutoSave: true,
+    // questionTypes: ["text", "checkbox", "radiogroup", "dropdown"],
 };
 
 const FormBuilder: FC = () => {
@@ -33,6 +34,8 @@ const FormBuilder: FC = () => {
             newCreator.text = config.value;
         }
     
+        // newCreator.toolbox.removeCategories();
+
         // Autosave function
         newCreator.saveSurveyFunc = (
             saveNo: number,
