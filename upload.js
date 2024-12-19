@@ -76,7 +76,7 @@ const stdInterface = createInterface({
     // Default to the original if no built index.html was found
     const filePath = existsSync(builtPath)
         ? builtPath
-        : resolve(__dirname, '..', 'just-another-calendar.html');
+        : resolve(__dirname, '..', 'form.html');
 
     if (!existsSync(filePath))
         throw new Error(`The module HTML-file was not found. The following paths were checked: ${builtPath}, ${filePath}`);
