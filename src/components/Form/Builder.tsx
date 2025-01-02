@@ -6,12 +6,6 @@ import { Serializer } from "survey-core";
 import "survey-creator-core/i18n";
 import { useMemo } from "react";
 
-const creatorOptions = {
-    showLogicTab: true,
-    isAutoSave: true,
-    // questionTypes: ["text", "checkbox", "radiogroup", "dropdown"],
-};
-
 const FormBuilder: FC = () => {
     const [config, setConfig] = useConfigState();
 
@@ -19,6 +13,12 @@ const FormBuilder: FC = () => {
 
     // useMemo so you can choose when to re-render
     const creator = useMemo(() => {
+        const creatorOptions = {
+            showLogicTab: true,
+            isAutoSave: true,
+            questionTypes: config.questionTypes,
+        };
+
         // Because it's "nb" instead of "no"
         const locale = config.locale === "en" ? "en" : "nb";
         editorLocalization.defaultLocale = locale;
@@ -35,9 +35,9 @@ const FormBuilder: FC = () => {
             newCreator.text = config.value;
         }
     
-        // newCreator.toolbox.removeCategories();
+        newCreator.toolbox.removeCategories();
 
-        //Serializer.findProperty("question", "name").visible = false;
+        Serializer.findProperty("question", "name").visible = false;
 
         // Autosave function
         newCreator.saveSurveyFunc = (
@@ -54,7 +54,7 @@ const FormBuilder: FC = () => {
         };
     
         return newCreator;
-    }, [config.locale]); // Add deps that should trigger a re-render
+    }, [config.locale, config.questionTypes]); // Add deps that should trigger a re-render
 
     console.log("render builder");
 

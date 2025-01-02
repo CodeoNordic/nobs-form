@@ -14,6 +14,9 @@ declare global {
             // The version of the form
             type: 'viewer'|'builder'|'visualizer';
 
+            // The types of questions that can be added to the form
+            questionTypes: string[];
+
             // The language of the form, can be more if needed
             locale: "no"|"en";
 
