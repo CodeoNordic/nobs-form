@@ -14,9 +14,21 @@ const FormBuilder: FC = () => {
     // useMemo so you can choose when to re-render
     const creator = useMemo(() => {
         const creatorOptions = {
-            showLogicTab: true,
             isAutoSave: true,
             questionTypes: config.questionTypes,
+            ...(config.creatorTabs && typeof config.creatorTabs == "boolean" ? {
+                showLogicTab: true,
+                showJSONEditorTab: true,
+                showTestSurveyTab: true
+            } : ( config.creatorTabs && Array.isArray(config.creatorTabs) && config.creatorTabs.length > 0 ? {
+                showLogicTab: config.creatorTabs.includes("logic"),
+                showJSONEditorTab: config.creatorTabs.includes("json"),
+                showTestSurveyTab: config.creatorTabs.includes("preview")
+            } : {
+                showLogicTab: false, 
+                showJSONEditorTab: false, 
+                showTestSurveyTab: false 
+            }))
         };
 
         // Because it's "nb" instead of "no"
@@ -54,7 +66,7 @@ const FormBuilder: FC = () => {
         };
     
         return newCreator;
-    }, [config.locale, config.questionTypes]); // Add deps that should trigger a re-render
+    }, [config.locale, config.questionTypes, config.creatorTabs]); // Add deps that should trigger a re-render
 
     console.log("render builder");
 

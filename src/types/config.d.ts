@@ -17,6 +17,10 @@ declare global {
             // The types of questions that can be added to the form
             questionTypes: string[];
 
+            // Whether to show the extra creator tabs or not, can be an array of tabs to show
+            // Possible tabs: "logic", "json", "preview"
+            creatorTabs?: boolean|("logic"|"json"|"preview")[];
+
             // The language of the form, can be more if needed
             locale: "no"|"en";
 

@@ -5,6 +5,7 @@ import { warn } from '@utils/log';
 const defaultConfig: Partial<Form.Config> = {
     type: 'viewer',
     locale: 'no',
+    creatorTabs: true,
 };
 
 // Parses the JSON from FileMaker into a readable config
