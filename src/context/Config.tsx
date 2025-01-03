@@ -42,6 +42,7 @@ window.init = cfg => {
 const validateConfig = (config: any): Form.Config => {
     const validTypes = ['builder', 'viewer', 'visualizer'];
     const validLocales = ['en', 'no'];
+    const validTabs = ['logic', 'json', 'preview'];
 
     const validatedConfig = { ...defaultConfig, ...config };
   
@@ -85,6 +86,34 @@ const validateConfig = (config: any): Form.Config => {
         } catch (e) {
             warn("Failed to parse previous answers, will start with empty array.", e);
             validatedConfig.answers = '';
+        }
+    }
+
+    if (config.questionTypes) {
+        try {
+            if (!Array.isArray(config.questionTypes)) {
+                throw new Error("Not an array");
+            }
+        } catch (e) {
+            warn("Failed to parse question types, will start with empty array.", e);
+            validatedConfig.questionTypes = '';
+        }
+    }
+
+    if (config.creatorTabs) {
+        if (typeof config.creatorTabs === 'boolean') {
+            validatedConfig.creatorTabs = config.creatorTabs;
+        } else if (Array.isArray(config.creatorTabs)) {
+            validatedConfig.creatorTabs = config.creatorTabs.filter((tab: string) => {
+                if (!validTabs.includes(tab)) {
+                    warn(`Invalid creatorTab "${tab}", won't use`);
+                    return false;
+                }
+                return true;
+            });
+        } else {
+            warn(`"Invalid creatorTabs, defaulting to "${defaultConfig.creatorTabs}"`);
+            validatedConfig.creatorTabs = defaultConfig.creatorTabs;
         }
     }
   
