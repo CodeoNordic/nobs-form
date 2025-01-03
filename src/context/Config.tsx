@@ -39,6 +39,7 @@ window.init = cfg => {
     runLoadCallbacks();
 };
 
+// Validates the config object every time it's set or updated
 const validateConfig = (config: any): Form.Config => {
     const validTypes = ['builder', 'viewer', 'visualizer'];
     const validLocales = ['en', 'no'];
@@ -85,7 +86,7 @@ const validateConfig = (config: any): Form.Config => {
             }
         } catch (e) {
             warn("Failed to parse previous answers, will start with empty array.", e);
-            validatedConfig.answers = '';
+            validatedConfig.answers = [];
         }
     }
 
@@ -96,7 +97,7 @@ const validateConfig = (config: any): Form.Config => {
             }
         } catch (e) {
             warn("Failed to parse question types, will start with empty array.", e);
-            validatedConfig.questionTypes = '';
+            validatedConfig.questionTypes = [];
         }
     }
 
@@ -104,14 +105,23 @@ const validateConfig = (config: any): Form.Config => {
         if (typeof config.creatorTabs === 'boolean') {
             validatedConfig.creatorTabs = config.creatorTabs;
         } else if (Array.isArray(config.creatorTabs)) {
-            validatedConfig.creatorTabs = config.creatorTabs.filter((tab: string) => {
+            const filteredTabs = config.creatorTabs.filter((tab: string) => {
                 if (!validTabs.includes(tab)) {
                     warn(`Invalid creatorTab "${tab}", won't use`);
                     return false;
                 }
                 return true;
             });
-        } else {
+        
+            // Only update if there's an actual difference, to avoid unnecessary re-renders
+            if (
+                !Array.isArray(validatedConfig.creatorTabs) ||
+                filteredTabs.length !== validatedConfig.creatorTabs.length ||
+                filteredTabs.some((t: string, i: number) => t !== validatedConfig.creatorTabs[i])
+            ) {
+                validatedConfig.creatorTabs = filteredTabs;
+            }
+        } else  {
             warn(`"Invalid creatorTabs, defaulting to "${defaultConfig.creatorTabs}"`);
             validatedConfig.creatorTabs = defaultConfig.creatorTabs;
         }

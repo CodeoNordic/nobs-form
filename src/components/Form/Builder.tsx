@@ -41,9 +41,15 @@ const FormBuilder: FC = () => {
         surveyLocalization.supportedLocales = ["no", "en"];
     
         const newCreator = new SurveyCreator(creatorOptions);
-    
         if (config.value) {
-            newCreator.text = config.value;
+            try {
+                const surveyJson = JSON.parse(config.value);
+                surveyJson.clearInvisibleValues = "onHidden";
+                newCreator.JSON = surveyJson;
+            } catch (e) {
+                // fallback
+                newCreator.text = config.value;
+            }
         }
 
         // Autosave function
