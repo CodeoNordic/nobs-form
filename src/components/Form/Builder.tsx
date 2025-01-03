@@ -2,7 +2,6 @@ import { editorLocalization, SurveyCreator, SurveyCreatorComponent } from "surve
 import { surveyLocalization } from "survey-react-ui";
 import { useConfigState } from "@context/Config";
 import performScript from "@utils/performScript";
-import { Serializer } from "survey-core";
 import "survey-creator-core/i18n";
 import { useMemo } from "react";
 
@@ -46,10 +45,6 @@ const FormBuilder: FC = () => {
         if (config.value) {
             newCreator.text = config.value;
         }
-    
-        newCreator.toolbox.removeCategories();
-
-        Serializer.findProperty("question", "name").visible = false;
 
         // Autosave function
         newCreator.saveSurveyFunc = (
