@@ -21,6 +21,11 @@ declare global {
             // Possible tabs: "logic", "json", "preview"
             creatorTabs?: boolean|("logic"|"json"|"preview")[];
 
+            visualizerOptions?: {
+                allowHideQuestions?: boolean;
+                allowMoveQuestions?: boolean;
+            }
+
             // The language of the form, can be more if needed
             locale: "no"|"en";
 

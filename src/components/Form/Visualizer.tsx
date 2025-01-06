@@ -1,6 +1,6 @@
 import { VisualizationPanel } from "survey-analytics";
-import { useEffect, useMemo, useState } from "react";
 import { useConfig } from "@context/Config";
+import { useEffect, useMemo } from "react";
 import { Model } from "survey-react-ui";
 import { warn } from "@utils/log";
 import "survey-core/i18n";
@@ -28,7 +28,10 @@ const FormVisualizer: FC = () => {
         const newVisualizer = new VisualizationPanel(
             survey.getAllQuestions(),
             JSON.parse(config.answers),
-            {} // options, add to config later
+            {
+                allowDragDrop: config.visualizerOptions?.allowMoveQuestions,
+                allowHideQuestions: config.visualizerOptions?.allowHideQuestions,
+            }
         );
 
         newVisualizer.locale = config.locale;
@@ -41,7 +44,7 @@ const FormVisualizer: FC = () => {
                 visualizerElement.innerHTML = "";
             }
         }
-    }, [survey, config.answers, config.locale]);
+    }, [survey, config.answers, config.locale, config.visualizerOptions]);
 
     console.log("render visualizer");
 
