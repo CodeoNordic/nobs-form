@@ -7,75 +7,81 @@ init(JSON.stringify({
 }))
 
 
-`{
-  "logoPosition": "right",
-  "pages": [
-    {
-      "name": "side1",
-      "elements": [
-        {
-          "type": "text",
-          "name": "spørsmål1",
-          "title": "Ønsket leveringsdato",
-          "isRequired": true,
-          "inputType": "date"
-        },
-        {
-          "type": "text",
-          "name": "spørsmål2",
-          "title": "Order nummer og initialer",
-          "isRequired": true
-        },
-        {
-          "type": "radiogroup",
-          "name": "spørsmål3",
-          "title": "Type protese",
-          "choices": [
-            "Item 1",
-            "Item 2",
-            "Item 3"
-          ]
-        },
-        {
-          "type": "radiogroup",
-          "name": "spørsmål4",
-          "title": "Type protese",
-          "isRequired": true,
-          "choices": [
-            {
-              "value": "Item 1",
-              "text": "TF"
-            },
-            {
-              "value": "Item 2",
-              "text": "KD"
-            },
-            {
-              "value": "Item 3",
-              "text": "TT"
-            },
-            {
-              "value": "Item 4",
-              "text": "Delfot"
-            },
-            {
-              "value": "Item 5",
-              "text": "DS"
-            }
-          ]
-        },
-        {
-          "type": "checkbox",
-          "name": "spørsmål5",
-          "title": "Type bilaterale proteser",
-          "choices": [
-            "Item 1",
-            "Item 2",
-            "Item 3"
-          ],
-          "maxSelectedChoices": 2
-        }
-      ]
-    }
-  ]
-}`
+init(JSON.stringify({
+    value: `{
+            "logoPosition": "right",
+            "pages": [
+              {
+                "name": "side1",
+                "elements": [
+                  {
+                    "type": "text",
+                    "name": "spørsmål1",
+                    "title": "Ønsket leveringsdato",
+                    "isRequired": true,
+                    "inputType": "date"
+                  },
+                  {
+                    "type": "text",
+                    "name": "spørsmål2",
+                    "title": "Order nummer og initialer",
+                    "isRequired": true
+                  },
+                  {
+                    "type": "radiogroup",
+                    "name": "spørsmål3",
+                    "title": "Type protese",
+                    "choices": [
+                      "Item 1",
+                      "Item 2",
+                      "Item 3"
+                    ]
+                  },
+                  {
+                    "type": "radiogroup",
+                    "name": "spørsmål4",
+                    "title": "Type protese",
+                    "isRequired": true,
+                    "choices": [
+                      {
+                        "value": "Item 1",
+                        "text": "TF"
+                      },
+                      {
+                        "value": "Item 2",
+                        "text": "KD"
+                      },
+                      {
+                        "value": "Item 3",
+                        "text": "TT"
+                      },
+                      {
+                        "value": "Item 4",
+                        "text": "Delfot"
+                      },
+                      {
+                        "value": "Item 5",
+                        "text": "DS"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "checkbox",
+                    "name": "spørsmål5",
+                    "title": "Type bilaterale proteser",
+                    "choices": [
+                      "Item 1",
+                      "Item 2",
+                      "Item 3"
+                    ],
+                    "maxSelectedChoices": 2
+                  }
+                ]
+              }
+            ]
+          }`,
+    type: 'builder',
+    locale: 'no',
+    questionTypes: `["asdasdext", "radiogroup", "imagepicker"]"`,
+    creatorTabs: ["json", "preview", "asdads"]
+}))
