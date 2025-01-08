@@ -7,7 +7,7 @@ init(JSON.stringify({
 }))
 
 
-"{
+`{
   "logoPosition": "right",
   "pages": [
     {
@@ -78,4 +78,4 @@ init(JSON.stringify({
       ]
     }
   ]
-}"
+}`
