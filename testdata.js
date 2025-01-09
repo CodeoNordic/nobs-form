@@ -9,77 +9,243 @@ init(JSON.stringify({
 
 init(JSON.stringify({
     value: `{
-            "logoPosition": "right",
-            "pages": [
-              {
-                "name": "side1",
-                "elements": [
-                  {
-                    "type": "text",
-                    "name": "spørsmål1",
-                    "title": "Ønsket leveringsdato",
-                    "isRequired": true,
-                    "inputType": "date"
-                  },
-                  {
-                    "type": "text",
-                    "name": "spørsmål2",
-                    "title": "Order nummer og initialer",
-                    "isRequired": true
-                  },
-                  {
-                    "type": "radiogroup",
-                    "name": "spørsmål3",
-                    "title": "Type protese",
-                    "choices": [
-                      "Item 1",
-                      "Item 2",
-                      "Item 3"
-                    ]
-                  },
-                  {
-                    "type": "radiogroup",
-                    "name": "spørsmål4",
-                    "title": "Type protese",
-                    "isRequired": true,
-                    "choices": [
-                      {
-                        "value": "Item 1",
-                        "text": "TF"
-                      },
-                      {
-                        "value": "Item 2",
-                        "text": "KD"
-                      },
-                      {
-                        "value": "Item 3",
-                        "text": "TT"
-                      },
-                      {
-                        "value": "Item 4",
-                        "text": "Delfot"
-                      },
-                      {
-                        "value": "Item 5",
-                        "text": "DS"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "checkbox",
-                    "name": "spørsmål5",
-                    "title": "Type bilaterale proteser",
-                    "choices": [
-                      "Item 1",
-                      "Item 2",
-                      "Item 3"
-                    ],
-                    "maxSelectedChoices": 2
-                  }
-                ]
-              }
-            ]
-          }`,
+  "logoPosition": "right",
+  "pages": [
+    {
+      "name": "side1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "spørsmål1",
+          "title": "Ønsket leveringsdato",
+          "isRequired": true,
+          "inputType": "date"
+        },
+        {
+          "type": "text",
+          "name": "spørsmål2",
+          "title": "Order nummer og initialer",
+          "isRequired": true
+        },
+        {
+          "type": "radiogroup",
+          "name": "spørsmål3",
+          "title": "Side",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "Item 1",
+              "text": "Høyre"
+            },
+            {
+              "value": "Item 2",
+              "text": "Venstre"
+            },
+            {
+              "value": "Item 3",
+              "text": "Bilateral"
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "spørsmål4",
+          "visibleIf": "{spørsmål3} = 'Item 1' or {spørsmål3} = 'Item 2'",
+          "title": "Type protese",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "Item 1",
+              "text": "TF"
+            },
+            {
+              "value": "Item 2",
+              "text": "KD"
+            },
+            {
+              "value": "Item 3",
+              "text": "TT"
+            },
+            {
+              "value": "Item 4",
+              "text": "Delfot"
+            },
+            {
+              "value": "Item 5",
+              "text": "DS"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "name": "spørsmål5",
+          "visibleIf": "{spørsmål3} = 'Item 3'",
+          "title": "Type bilaterale proteser",
+          "isRequired": true,
+          "choices": [
+            "Item 1",
+            "Item 2",
+            "Item 3"
+          ],
+          "maxSelectedChoices": 2
+        }
+      ]
+    },
+    {
+      "name": "side2",
+      "visibleIf": "{spørsmål4} = 'Item 3'",
+      "title": "Protese oppsett TT",
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "spørsmål6",
+          "title": "Støp type",
+          "choices": [
+            {
+              "value": "Item 1",
+              "text": "Standard Glass"
+            },
+            {
+              "value": "Item 2",
+              "text": "Kraftig Glass"
+            },
+            {
+              "value": "Item 3",
+              "text": "Standard Karbon"
+            },
+            {
+              "value": "Item 4",
+              "text": "Kraftig Karbon"
+            }
+          ]
+        },
+        {
+          "type": "dropdown",
+          "name": "spørsmål7",
+          "title": "Støp farge",
+          "choices": [
+            {
+              "value": "Item 1",
+              "text": "Beige"
+            },
+            {
+              "value": "Item 2",
+              "text": "Sort"
+            },
+            {
+              "value": "Item 3",
+              "text": "Mørkebrun"
+            },
+            {
+              "value": "Item 4",
+              "text": "Blå"
+            },
+            {
+              "value": "Item 5",
+              "text": "Gul"
+            },
+            {
+              "value": "Item 6",
+              "text": "Rød"
+            },
+            {
+              "value": "Item 7",
+              "text": "Grønn"
+            },
+            {
+              "value": "Item 8",
+              "text": "Mønster"
+            }
+          ],
+          "showOtherItem": true
+        },
+        {
+          "type": "dropdown",
+          "name": "spørsmål8",
+          "title": "Utforming",
+          "choices": [
+            {
+              "value": "Item 1",
+              "text": "Hylser med liner"
+            },
+            {
+              "value": "Item 2",
+              "text": "Hylse med innsett"
+            },
+            {
+              "value": "Item 3",
+              "text": "Mykhylse med ramme"
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "spørsmål9",
+          "visibleIf": "{spørsmål8} = 'Item 1'",
+          "title": "Oppsett med liner",
+          "choices": [
+            {
+              "value": "Item 1",
+              "text": "Pinnlås"
+            },
+            {
+              "value": "Item 2",
+              "text": "Ventil"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "name": "spørsmål10",
+          "visibleIf": "{spørsmål8} = 'Item 3'",
+          "title": "Tykkelse plast"
+        },
+        {
+          "type": "dropdown",
+          "name": "spørsmål11",
+          "visibleIf": "{spørsmål8} = 'Item 2'",
+          "title": "Innsett tykkelse",
+          "choices": [
+            {
+              "value": "Item 1",
+              "text": "4mm"
+            },
+            {
+              "value": "Item 2",
+              "text": "5mm"
+            },
+            {
+              "value": "Item 3",
+              "text": "6mm"
+            },
+            {
+              "value": "Item 4",
+              "text": "7mm"
+            }
+          ]
+        },
+        {
+          "type": "dropdown",
+          "name": "spørsmål12",
+          "visibleIf": "{spørsmål8} = 'Item 2'",
+          "title": "Innsett farge",
+          "choices": [
+            {
+              "value": "Item 1",
+              "text": "Beige"
+            },
+            {
+              "value": "Item 2",
+              "text": "Sort"
+            }
+          ],
+          "showOtherItem": true
+        }
+      ]
+    }
+  ],
+  "clearInvisibleValues": "onHidden"
+}`,
     type: 'builder',
     locale: 'no',
     questionTypes: `["asdasdext", "radiogroup", "imagepicker"]"`,
