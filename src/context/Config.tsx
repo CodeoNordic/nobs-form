@@ -3,9 +3,13 @@ import { loadCallbacks } from '@utils/performScript';
 import { warn } from '@utils/log';
 
 const defaultConfig: Partial<Form.Config> = {
-    type: 'viewer',
+    type: 'builder',
     locale: 'no',
-    creatorTabs: true,
+    creatorOptions: {
+        questionTypes: [],
+        tabs: true,
+        isAutoSave: true
+    },
 };
 
 // Parses the JSON from FileMaker into a readable config
@@ -92,12 +96,12 @@ const validateConfig = (config: any): Form.Config => {
 
     if (config.questionTypes) {
         try {
-            if (!Array.isArray(config.questionTypes)) {
-                throw new Error("Not an array");
+            if (!Array.isArray(config.questionTypes) && typeof config.questionTypes !== 'boolean') {
+                throw new Error("Not an array or boolean");
             }
         } catch (e) {
-            warn("Failed to parse question types, will start with empty array.", e);
-            validatedConfig.questionTypes = [];
+            warn("Failed to parse question types, will set to true (show all).", e);
+            validatedConfig.questionTypes = true;
         }
     }
 
@@ -122,8 +126,8 @@ const validateConfig = (config: any): Form.Config => {
                 validatedConfig.creatorTabs = filteredTabs;
             }
         } else  {
-            warn(`"Invalid creatorTabs, defaulting to "${defaultConfig.creatorTabs}"`);
-            validatedConfig.creatorTabs = defaultConfig.creatorTabs;
+            warn(`"Invalid creatorTabs, defaulting to "${defaultConfig.creatorOptions?.tabs}"`);
+            validatedConfig.creatorTabs = defaultConfig.creatorOptions?.tabs;
         }
     }
   

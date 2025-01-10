@@ -14,12 +14,22 @@ declare global {
             // The version of the form
             type: 'viewer'|'builder'|'visualizer';
 
-            // The types of questions that can be added to the form
-            questionTypes: string[];
+            creatorOptions?: {
+                // The types of questions that can be added to the form
+                // True to show all, false to show none, or an array of types to show
+                questionTypes?: boolean|string[];
 
-            // Whether to show the extra creator tabs or not, can be an array of tabs to show
-            // Possible tabs: "logic", "json", "preview"
-            creatorTabs?: boolean|("logic"|"json"|"preview")[];
+                // The options to show in the sidemenu to the right when editing a question
+                // True to show all, false to show none, or an array of options to show
+                propertyGrid?: boolean|string[];
+                
+                // Whether the form should autosave on edit or not
+                isAutoSave?: boolean;
+
+                // Whether to show the extra creator tabs or not, can be an array of tabs to show
+                // Possible tabs: "logic", "json", "preview"
+                tabs?: boolean|("logic"|"json"|"preview")[];
+            }
 
             visualizerOptions?: {
                 allowHideQuestions?: boolean;

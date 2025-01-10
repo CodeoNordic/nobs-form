@@ -12,17 +12,23 @@ const FormBuilder: FC = () => {
 
     // useMemo so you can choose when to re-render
     const creator = useMemo(() => {
+        const validatedQuestionTypes = Array.isArray(config.creatorOptions?.questionTypes) && config.creatorOptions?.questionTypes.length > 0
+                ? config.creatorOptions?.questionTypes 
+                : [];
+
+        console.log(validatedQuestionTypes);
+        
         const creatorOptions = {
             isAutoSave: true,
-            questionTypes: config.questionTypes,
-            ...(config.creatorTabs && typeof config.creatorTabs == "boolean" ? {
+            questionTypes: validatedQuestionTypes,
+            ...(config.creatorOptions?.tabs && typeof config.creatorOptions?.tabs == "boolean" ? {
                 showLogicTab: true,
                 showJSONEditorTab: true,
                 showTestSurveyTab: true
-            } : ( config.creatorTabs && Array.isArray(config.creatorTabs) && config.creatorTabs.length > 0 ? {
-                showLogicTab: config.creatorTabs.includes("logic"),
-                showJSONEditorTab: config.creatorTabs.includes("json"),
-                showTestSurveyTab: config.creatorTabs.includes("preview")
+            } : ( config.creatorOptions?.tabs && Array.isArray(config.creatorOptions?.tabs) && config.creatorOptions?.tabs.length > 0 ? {
+                showLogicTab: config.creatorOptions?.tabs.includes("logic"),
+                showJSONEditorTab: config.creatorOptions?.tabs.includes("json"),
+                showTestSurveyTab: config.creatorOptions?.tabs.includes("preview")
             } : {
                 showLogicTab: false, 
                 showJSONEditorTab: false, 
@@ -41,6 +47,13 @@ const FormBuilder: FC = () => {
         surveyLocalization.supportedLocales = ["no", "en"];
     
         const newCreator = new SurveyCreator(creatorOptions);
+
+        // Hide question types if set to false or empty array
+        if (config.creatorOptions?.questionTypes === false || (Array.isArray(config.creatorOptions?.questionTypes) && config.creatorOptions?.questionTypes.length === 0)) {
+            console.log("Hiding question types");
+            newCreator.toolbox.clearItems();
+        }
+
         if (config.value) {
             try {
                 const surveyJson = JSON.parse(config.value);
@@ -65,9 +78,22 @@ const FormBuilder: FC = () => {
             }
             callback(saveNo, true);
         };
-    
+        
         return newCreator;
-    }, [config.locale, config.questionTypes, config.creatorTabs]); // Add deps that should trigger a re-render
+    }, [config.locale, config.creatorOptions?.questionTypes, config.creatorOptions?.tabs]); // Add deps that should trigger a re-render
+    
+    if (creator) {
+        const whiteList = ["isRequired"];
+
+        creator.onShowingProperty.add(function (_, options) {
+            // console.log(options.obj.getType(), options.property.name);
+            // Hide properties found in `blackList`
+            //options.canShow = blackList.indexOf(options.property.name) === -1;
+        
+            // Hide all properties except those found in `whiteList`
+            options.canShow = whiteList.indexOf(options.property.name) > -1;
+        });
+    }
 
     console.log("render builder");
 
