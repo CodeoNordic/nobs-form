@@ -123,7 +123,7 @@ const validateConfig = (config: any): Form.Config => {
         } else if (Array.isArray(config.creatorOptions.tabs)) {
             const filteredTabs = config.creatorOptions.tabs.filter((tab: string) => {
                 if (!validTabs.includes(tab)) {
-                    warn(`Invalid creatorTab "${tab}", won't use`);
+                    warn(`Invalid tab for creator "${tab}", won't use`);
                     return false;
                 }
                 return true;
@@ -138,7 +138,7 @@ const validateConfig = (config: any): Form.Config => {
                 validatedConfig.creatorOptions.tabs = filteredTabs;
             }
         } else  {
-            warn("Invalid creatorTabs, defaulting to true (show all)");
+            warn("Invalid tabs for creator, defaulting to true (show all)");
             validatedConfig.creatorOptions.tabs = true;
         }
     }

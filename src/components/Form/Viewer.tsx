@@ -5,7 +5,6 @@ import { warn } from "@utils/log";
 import { useMemo } from "react";
 import "survey-core/i18n";
 
-
 const FormViewer: FC = () => {
     const [config, setConfig] = useConfigState();
 
