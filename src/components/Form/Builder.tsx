@@ -16,8 +16,6 @@ const FormBuilder: FC = () => {
                 ? config.creatorOptions?.questionTypes 
                 : [];
 
-        console.log(validatedQuestionTypes);
-        
         const creatorOptions = {
             isAutoSave: true,
             questionTypes: validatedQuestionTypes,
@@ -33,7 +31,8 @@ const FormBuilder: FC = () => {
                 showLogicTab: false, 
                 showJSONEditorTab: false, 
                 showTestSurveyTab: false 
-            }))
+            })),
+            showElementEditorAs: "form",
         };
 
         // Because it's "nb" instead of "no"
@@ -50,7 +49,6 @@ const FormBuilder: FC = () => {
 
         // Hide question types if set to false or empty array
         if (config.creatorOptions?.questionTypes === false || (Array.isArray(config.creatorOptions?.questionTypes) && config.creatorOptions?.questionTypes.length === 0)) {
-            console.log("Hiding question types");
             newCreator.toolbox.clearItems();
         }
 
@@ -82,16 +80,13 @@ const FormBuilder: FC = () => {
         return newCreator;
     }, [config.locale, config.creatorOptions?.questionTypes, config.creatorOptions?.tabs]); // Add deps that should trigger a re-render
     
-    if (creator) {
-        const whiteList = ["isRequired"];
-
+    // Show only the selected properties in the property grid
+    if (creator && config.creatorOptions?.propertyGrid) {
         creator.onShowingProperty.add(function (_, options) {
-            // console.log(options.obj.getType(), options.property.name);
-            // Hide properties found in `blackList`
-            //options.canShow = blackList.indexOf(options.property.name) === -1;
-        
-            // Hide all properties except those found in `whiteList`
-            options.canShow = whiteList.indexOf(options.property.name) > -1;
+            options.canShow = config.creatorOptions?.propertyGrid === true || (
+                Array.isArray(config.creatorOptions?.propertyGrid) 
+                    && config.creatorOptions?.propertyGrid.indexOf(options.property.name) > -1
+            );
         });
     }
 
