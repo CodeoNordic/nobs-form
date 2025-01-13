@@ -254,3 +254,42 @@ init(JSON.stringify({
       questionTypes: ["asdasdext", "radiogroup", "imagepicker"],
   }
 }))
+
+setConfigProp("creatorOptions.questionTypes", false)
+setConfigProp("creatorOptions.questionTypes", true)
+setConfigProp("creatorOptions.questionTypes", ["text"])
+
+setConfigProp("creatorOptions.propertyGrid", false)
+setConfigProp("creatorOptions.propertyGrid", true)
+setConfigProp("creatorOptions.propertyGrid", ["isRequired"])
+
+setConfigProp("creatorOptions.tabs", false)
+setConfigProp("creatorOptions.tabs", true)
+setConfigProp("creatorOptions.tabs", ["preview", "logic"])
+
+setConfigProp("locale", "en")
+setConfigProp("locale", "no")
+
+setConfigProp("type", "viewer")
+setConfigProp("type", "builder")
+setConfigProp("type", "visualizer")
+
+setConfigProp("answers", `[
+  {
+    "spørsmål1": "2025-01-17",
+    "spørsmål2": "1234dfs",
+    "spørsmål3": "Item 1",
+    "spørsmål4": "Item 1"
+  },
+  {
+    "spørsmål1": "2025-01-24",
+    "spørsmål2": "123dsasd",
+    "spørsmål3": "Item 1",
+    "spørsmål4": "Item 3",
+    "spørsmål6": "Item 2",
+    "spørsmål7": "Item 2",
+    "spørsmål8": "Item 2",
+    "spørsmål11": "Item 1",
+    "spørsmål12": "Item 2"
+  }
+]`, 1)

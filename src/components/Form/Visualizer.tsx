@@ -2,18 +2,12 @@ import { VisualizationPanel } from "survey-analytics";
 import { useConfig } from "@context/Config";
 import { useEffect, useMemo } from "react";
 import { Model } from "survey-react-ui";
-import { warn } from "@utils/log";
 import "survey-core/i18n";
 
 const FormVisualizer: FC = () => {
     const config = useConfig();
 
     if (!config) return null;
-
-    if (!config.value || !config.answers) {
-        warn("No form value or answers provided, cannot render visualizer.");
-        return null;
-    }
 
     const survey = useMemo(() => {
         return new Model(config.value);

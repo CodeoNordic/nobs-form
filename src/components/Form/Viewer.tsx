@@ -11,11 +11,6 @@ const FormViewer: FC = () => {
 
     if (!config) return null;
 
-    if (!config.value) {
-        warn("No form value provided, cannot render form.");
-        return null
-    }
-
     // useMemo so you can choose when to re-render
     const survey = useMemo(() => {
         const newSurvey = new Model(config.value);
