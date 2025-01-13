@@ -24,9 +24,9 @@ const FormBuilder: FC = () => {
                 showJSONEditorTab: true,
                 showTestSurveyTab: true
             } : ( config.creatorOptions?.tabs && Array.isArray(config.creatorOptions?.tabs) && config.creatorOptions?.tabs.length > 0 ? {
-                showLogicTab: config.creatorOptions?.tabs.includes("logic"),
-                showJSONEditorTab: config.creatorOptions?.tabs.includes("json"),
-                showTestSurveyTab: config.creatorOptions?.tabs.includes("preview")
+                showLogicTab: config.creatorOptions.tabs.includes("logic"),
+                showJSONEditorTab: config.creatorOptions.tabs.includes("json"),
+                showTestSurveyTab: config.creatorOptions.tabs.includes("preview")
             } : {
                 showLogicTab: false, 
                 showJSONEditorTab: false, 
@@ -58,7 +58,7 @@ const FormBuilder: FC = () => {
                 surveyJson.clearInvisibleValues = "onHidden";
                 newCreator.JSON = surveyJson;
             } catch (e) {
-                // fallback
+                // fallback if the JSON is invalid
                 newCreator.text = config.value;
             }
         }

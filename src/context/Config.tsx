@@ -6,8 +6,8 @@ const defaultConfig: Partial<Form.Config> = {
     type: 'builder',
     locale: 'no',
     creatorOptions: {
-        questionTypes: [],
-        propertyGrid: [],
+        questionTypes: true,
+        propertyGrid: true,
         tabs: true,
         isAutoSave: true
     },
