@@ -67,11 +67,14 @@ const FormViewer: FC = () => {
             if (config.scriptNames?.onSubmit) {
                 performScript("onSubmit", { result: result.data });
             }
-        });  
-
+        });
+        
+        newSurvey.showNavigationButtons = false // testing removing complete button
+        
         return newSurvey;
     }, [config.value, config.locale]);
     
+
     console.log("render viewer");
 
     return <Survey model={survey} />;

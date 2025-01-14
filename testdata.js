@@ -293,3 +293,47 @@ setConfigProp("answers", `[
     "spørsmål12": "Item 2"
   }
 ]`, 1)
+
+
+`{
+  "title": "Målskjema",
+  "logoPosition": "right",
+  "pages": [
+    {
+      "name": "side1",
+      "elements": [
+        {
+          "type": "multipletext",
+          "name": "spørsmål1",
+          "title": "Sko",
+          "items": [
+            {
+              "name": "Tekst1",
+              "title": "Modell"
+            },
+            {
+              "name": "Tekst2",
+              "title": "Farge"
+            },
+            {
+              "name": "Tekst3",
+              "title": "Størrelse"
+            },
+            {
+              "name": "Tekst4",
+              "title": "Lest"
+            },
+            {
+              "name": "Tekst5",
+              "title": "Såle"
+            },
+            {
+              "name": "Tekst6",
+              "title": "Pasninger/endringer"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}`
