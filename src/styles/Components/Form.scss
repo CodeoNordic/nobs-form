@@ -1,3 +1,57 @@
 .svc-creator {
     height: 100vh !important;
 }
+
+.sd-element__content.sd-panel__content {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.sd-row {
+    margin-top: 0 !important;
+}
+
+.sd-row__panel {
+    padding: 0 !important;
+    height: min-content !important;
+}
+
+.sd-panel__header {
+    padding: 0 !important;
+}
+
+.sd-element--complex > .sd-element__header:after {
+    content: none !important;
+}
+
+.sd-input {
+    padding: 0 !important;
+}
+
+.sd-element--nested-with-borders {
+    padding: 0 !important;
+}
+
+.sd-item {
+    padding: 0 !important;
+}
+
+.sd-question__header {
+    margin: 0 !important;
+}
+
+.sd-question {
+    padding: 0 !important;
+}
+
+.sd-question__comment-area {
+    margin: 0 !important;
+}
+
+.sd-body {
+    padding: 0 !important;
+}
+
+// .sd-row--multiple > div {
+//     padding: 0 !important; // makes text go out of the screen, find workaround maybe
+// }
