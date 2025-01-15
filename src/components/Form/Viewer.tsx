@@ -69,11 +69,8 @@ const FormViewer: FC = () => {
             }
         });
         
-        newSurvey.showNavigationButtons = false // testing removing complete button
-        
         return newSurvey;
     }, [config.value, config.locale]);
-    
 
     console.log("render viewer");
 
