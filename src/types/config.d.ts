@@ -14,6 +14,9 @@ declare global {
             // The version of the form
             type: 'viewer'|'builder'|'visualizer';
 
+            // If the form should be compact or not
+            compact?: boolean;
+
             creatorOptions?: {
                 // The types of questions that can be added to the form
                 // True to show all, false to show none, or an array of types to show

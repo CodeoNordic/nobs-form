@@ -2,61 +2,65 @@
     height: 100vh !important;
 }
 
-.sd-element__content.sd-panel__content { // top and bottom of a panel
-    padding-top: 5px !important;
-    padding-bottom: 5px !important;
+.compact {    
+    height: 100vh !important;
+    
+    .sd-element__content.sd-panel__content { // top and bottom of a panel
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+    }
+    
+    .sd-row { // top of questions
+        margin-top: 16px !important;
+    }
+    
+    .sd-row__panel { // panel
+        padding-bottom: 5px !important;
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+        height: min-content !important;
+    }
+    
+    .sd-panel__header { // header of a panel
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+    
+    .sd-element--complex > .sd-element__header:after { // line under header
+        content: none !important;
+    }
+    
+    .sd-input { // input fields
+        padding: 4px !important;
+    }
+    
+    // .sd-element--nested-with-borders { // dosent do anything i think
+    //     //padding: 0 !important;
+    //     //background-color: red !important;
+    // }
+    
+    .sd-item { // over and under checkboxes, maybe more
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+    
+    .sd-question__header { // over question text
+        margin-top: 0 !important;
+    }
+    
+    .sd-element--with-frame.sd-row__question { // around normal questions
+        padding: 5px !important;
+    }
+    
+    .sd-question__comment-area { // over "Annet (beskriv)" area
+        margin-top: 5px !important;
+    }
+    
+    .sd-body { // around the whole form
+        padding: 16px !important;
+    }
+    
+    // .sd-row--multiple > div {
+    //     padding: 0 !important; // makes text go out of the screen, find workaround maybe
+    // }
 }
-
-.sd-row { // top of questions
-    margin-top: 16px !important;
-}
-
-.sd-row__panel { // panel
-    padding-bottom: 5px !important;
-    padding-left: 5px !important;
-    padding-right: 5px !important;
-    height: min-content !important;
-}
-
-.sd-panel__header { // header of a panel
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
-}
-
-.sd-element--complex > .sd-element__header:after { // line under header
-    content: none !important;
-}
-
-.sd-input { // input fields
-    padding: 4px !important;
-}
-
-// .sd-element--nested-with-borders { // dosent do anything i think
-//     //padding: 0 !important;
-//     //background-color: red !important;
-// }
-
-.sd-item { // over and under checkboxes, maybe more
-    padding-top: 0px !important;
-    padding-bottom: 0px !important;
-}
-
-.sd-question__header { // over question text
-    margin-top: 0 !important;
-}
-
-.sd-element--with-frame.sd-row__question { // around normal questions
-    padding: 5px !important;
-}
-
-.sd-question__comment-area { // over "Annet (beskriv)" area
-    margin-top: 5px !important;
-}
-
-.sd-body { // around the whole form
-    padding: 16px !important;
-}
-
-// .sd-row--multiple > div {
-//     padding: 0 !important; // makes text go out of the screen, find workaround maybe
-// }
