@@ -817,6 +817,7 @@ setConfigProp("answers", `[
     }
   ],
   "showNavigationButtons": "none",
+  "showTitle": false,
   "showQuestionNumbers": "off",
   "clearInvisibleValues": "onHidden",
   "questionsOnPageMode": "singlePage"
