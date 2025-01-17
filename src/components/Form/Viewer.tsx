@@ -4,6 +4,7 @@ import { Model, Survey } from "survey-react-ui";
 import { warn } from "@utils/log";
 import { useMemo } from "react";
 import "survey-core/i18n";
+import { Serializer } from "survey-core";
 
 const FormViewer: FC = () => {
     const [config, setConfig] = useConfigState();
@@ -43,10 +44,15 @@ const FormViewer: FC = () => {
             setConfig({ ...config, answerData: JSON.stringify(data) });
         }
 
-        newSurvey.onValueChanged.add((result) => {
+        
+        newSurvey.onValueChanged.add((result, options) => {
+            if (!!options.question && options.question.validateOnValueChanged) {
+                options.question.hasErrors(true);
+            }
+
             saveAnswerData(result);
         });
-
+        
         newSurvey.onCurrentPageChanged.add((result) => {
             saveAnswerData(result);
         });

@@ -572,6 +572,13 @@ setConfigProp("answers", `[
           "name": "spørsmål6",
           "title": "Type",
           "titleLocation": "left",
+          "validators": [
+            {
+              "type": "expression",
+              "text": "adadsadasda",
+              "expression": "{spørsmål6} = 'Item 1'"
+            }
+          ],
           "choices": [
             {
               "value": "Item 1",
@@ -813,11 +820,79 @@ setConfigProp("answers", `[
           ]
         }
       ]
+    },
+    {
+      "name": "side2",
+      "elements": [
+        {
+          "type": "text",
+          "name": "spørsmål24"
+        },
+        {
+          "type": "radiogroup",
+          "name": "spørsmål25",
+          "choices": [
+            "Item 1",
+            "Item 2",
+            "Item 3"
+          ]
+        },
+        {
+          "type": "rating",
+          "name": "spørsmål26"
+        },
+        {
+          "type": "boolean",
+          "name": "spørsmål27"
+        },
+        {
+          "type": "checkbox",
+          "name": "spørsmål28",
+          "choices": [
+            "Item 1",
+            "Item 2",
+            "Item 3"
+          ]
+        },
+        {
+          "type": "matrix",
+          "name": "spørsmål29",
+          "columns": [
+            "Kolonne 1",
+            "Kolonne 2",
+            "Kolonne 3"
+          ],
+          "rows": [
+            "Rad 1",
+            "Rad 2"
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "spørsmål30",
+          "elements": [
+            {
+              "type": "text",
+              "name": "spørsmål31"
+            },
+            {
+              "type": "tagbox",
+              "name": "spørsmål32",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3"
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "showNavigationButtons": "none",
-  "showTitle": false,
   "showQuestionNumbers": "off",
+  "showTitle": false,
   "clearInvisibleValues": "onHidden",
+  "checkErrorsMode": "onValueChanged",
   "questionsOnPageMode": "singlePage"
 }`

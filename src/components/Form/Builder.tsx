@@ -4,6 +4,7 @@ import { useConfigState } from "@context/Config";
 import performScript from "@utils/performScript";
 import "survey-creator-core/i18n";
 import { useMemo } from "react";
+import { Serializer } from "survey-core";
 
 const FormBuilder: FC = () => {
     const [config, setConfig] = useConfigState();
@@ -62,6 +63,11 @@ const FormBuilder: FC = () => {
                 newCreator.text = config.value;
             }
         }
+
+        Serializer.addProperty("question", {
+            name:"validateOnValueChanged:boolean", 
+            category: "validation"
+        });
 
         // Autosave function
         newCreator.saveSurveyFunc = (

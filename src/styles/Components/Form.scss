@@ -13,7 +13,13 @@
     .sd-row { // top of questions
         margin-top: 16px !important;
     }
-    
+
+    .sd-element--with-frame.sd-question--left > .sd-element__erbox--above-element { // error box
+        margin-left: -5px !important;
+        margin-right: -5px !important;
+        margin-top: -5px !important;
+    }
+
     .sd-row__panel { // panel
         padding-bottom: 5px !important;
         padding-left: 5px !important;
