@@ -22,13 +22,11 @@ const Form: FC = () => {
     console.log("render form");
 
     return <div className={`form ${config.compact ? "compact" : ""}`}>
-        {
-            config.type === "builder" 
-                ? <FormBuilder /> 
-                : config.type === "visualizer" 
-                    ? <FormVisualizer /> 
-                    : <FormViewer />
-        }
+        {config.type === "builder" 
+            ? <FormBuilder /> 
+            : config.type === "visualizer" 
+                ? <FormVisualizer /> 
+                : <FormViewer />}
     </div>;
 }
 

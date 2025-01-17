@@ -41,23 +41,30 @@
     
     .sd-item { // over and under checkboxes, maybe more
         padding-top: 0px !important;
-        padding-bottom: 0px !important;
+        padding-bottom: 10px !important;
     }
     
     .sd-question__header { // over question text
         margin-top: 0 !important;
+        padding-bottom: 5px !important;
+        padding-top: 0px !important;
     }
     
     .sd-element--with-frame.sd-row__question { // around normal questions
         padding: 5px !important;
+        overflow: hidden !important;
     }
     
     .sd-question__comment-area { // over "Annet (beskriv)" area
-        margin-top: 5px !important;
+        margin-top: 10px !important;
     }
     
     .sd-body { // around the whole form
         padding: 16px !important;
+    }
+
+    .sd-question__content { // around question text
+        padding-top: 0 !important;
     }
     
     // .sd-row--multiple > div {

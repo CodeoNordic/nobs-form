@@ -581,8 +581,7 @@ setConfigProp("answers", `[
               "value": "Item 2",
               "text": "OIL"
             }
-          ],
-          "colCount": 2
+          ]
         },
         {
           "type": "panel",
