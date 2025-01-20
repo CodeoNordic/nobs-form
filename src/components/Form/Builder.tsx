@@ -64,10 +64,21 @@ const FormBuilder: FC = () => {
             }
         }
 
-        Serializer.addProperty("question", {
-            name:"validateOnValueChanged:boolean", 
-            category: "validation"
-        });
+        if (config.locale == "en" && config.scriptNames?.validate) {
+            Serializer.removeProperty("question", "validerFraFilemaker");
+            Serializer.addProperty("question", {
+                name:"validateFromFilemaker", 
+                category: "validation",
+                type: "boolean",
+            });
+        } else if (config.locale == "no" && config.scriptNames?.validate) {
+            Serializer.removeProperty("question", "validateFromFilemaker");
+            Serializer.addProperty("question", {
+                name:"validerFraFilemaker", 
+                category: "validation",
+                type: "boolean",
+            });
+        }
 
         // Autosave function
         newCreator.saveSurveyFunc = (

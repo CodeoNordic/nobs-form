@@ -5,6 +5,7 @@ import { warn } from "@utils/log";
 import { useMemo } from "react";
 import "survey-core/i18n";
 import { Serializer } from "survey-core";
+import fetchFromFileMaker from "@utils/fetchFromFilemaker";
 
 const FormViewer: FC = () => {
     const [config, setConfig] = useConfigState();
@@ -44,12 +45,29 @@ const FormViewer: FC = () => {
             setConfig({ ...config, answerData: JSON.stringify(data) });
         }
 
-        
-        newSurvey.onValueChanged.add((result, options) => {
-            if (!!options.question && options.question.validateOnValueChanged) {
-                options.question.hasErrors(true);
+        const validateQuestion = (_: any, options: any) => {
+            if (
+                options.question && 
+                config.scriptNames?.validate && 
+                (
+                    options.question.validateFromFilemaker || 
+                    options.question.validerFraFilemaker
+                )
+            ) {
+                fetchFromFileMaker(config.scriptNames.validate, {
+                    name: options.question.name,
+                    value: options.value as string,
+                }).then((res) => {
+                    
+                }).catch((e) => {
+                    warn("Failed to validate question usinmg filemaker.", e);
+                });
             }
+        };
 
+        newSurvey.onValidateQuestion.add(validateQuestion);
+
+        newSurvey.onValueChanged.add((result, options) => {
             saveAnswerData(result);
         });
         
