@@ -559,340 +559,337 @@ setConfigProp("answers", `[
   "questionsOnPageMode": "singlePage"
 }`
 
-`{
-  "title": "Målskjema",
-  "logoPosition": "right",
-  "pages": [
-    {
-      "name": "side1",
-      "title": "",
-      "elements": [
-        {
-          "type": "radiogroup",
-          "name": "spørsmål6",
-          "title": "Type",
-          "titleLocation": "left",
-          "validators": [
-            {
-              "type": "expression",
-              "text": "adadsadasda",
-              "expression": "{spørsmål6} = 'Item 1'"
-            }
-          ],
-          "choices": [
-            {
-              "value": "Item 1",
-              "text": "OAS"
-            },
-            {
-              "value": "Item 2",
-              "text": "OIL"
-            }
-          ]
-        },
-        {
-          "type": "panel",
-          "name": "panel1",
-          "questionTitleWidth": "100px",
-          "title": "Sko",
-          "elements": [
-            {
-              "type": "text",
-              "name": "spørsmål1",
-              "title": "Modell",
-              "titleLocation": "left"
-            },
-            {
-              "type": "text",
-              "name": "spørsmål2",
-              "title": "Farge",
-              "titleLocation": "left"
-            },
-            {
-              "type": "text",
-              "name": "spørsmål3",
-              "title": "Størrelse",
-              "titleLocation": "left"
-            },
-            {
-              "type": "text",
-              "name": "spørsmål4",
-              "title": "Lest",
-              "titleLocation": "left"
-            },
-            {
-              "type": "text",
-              "name": "spørsmål5",
-              "title": "Såle",
-              "titleLocation": "left"
-            },
-            {
-              "type": "comment",
-              "name": "spørsmål7",
-              "title": "Pasninger/ endringer",
-              "titleLocation": "left"
-            }
-          ]
-        },
-        {
-          "type": "panel",
-          "name": "panel2",
-          "questionTitleWidth": "100px",
-          "title": "Fotseng",
-          "startWithNewLine": false,
-          "elements": [
-            {
-              "type": "dropdown",
-              "name": "spørsmål14",
-              "title": "Type avstøp",
-              "titleLocation": "left",
-              "choices": [
-                "Item 1",
-                "Item 2",
-                "Item 3"
-              ]
-            },
-            {
-              "type": "radiogroup",
-              "name": "spørsmål15",
-              "titleLocation": "hidden",
-              "choices": [
-                {
-                  "value": "Item 1",
-                  "text": "Ny"
-                },
-                {
-                  "value": "Item 2",
-                  "text": "Gammel"
-                },
-                {
-                  "value": "Item 3",
-                  "text": "Remodellert"
-                }
-              ],
-              "colCount": 3
-            },
-            {
-              "type": "panel",
-              "name": "spørsmål23",
-              "elements": [
-                {
-                  "type": "text",
-                  "name": "spørsmål8",
-                  "title": "Tverrpute",
-                  "titleLocation": "left"
-                },
-                {
-                  "type": "text",
-                  "name": "spørsmål9",
-                  "title": "Gelenk",
-                  "titleLocation": "left"
-                },
-                {
-                  "type": "text",
-                  "name": "spørsmål10",
-                  "title": "Kile",
-                  "titleLocation": "left"
-                },
-                {
-                  "type": "text",
-                  "name": "spørsmål11",
-                  "title": "Skostørrelse",
-                  "titleLocation": "left"
-                },
-                {
-                  "type": "text",
-                  "name": "spørsmål12",
-                  "title": "Lesteomriss",
-                  "titleLocation": "left"
-                }
-              ]
-            },
-            {
-              "type": "radiogroup",
-              "name": "spørsmål13",
-              "title": "PPT",
-              "titleLocation": "left",
-              "choices": [
-                {
-                  "value": "Item 1",
-                  "text": "1,5mm"
-                },
-                {
-                  "value": "Item 2",
-                  "text": "3mm"
-                },
-                {
-                  "value": "Item 3",
-                  "text": "6mm"
-                }
-              ],
-              "showOtherItem": true,
-              "colCount": 4
-            },
-            {
-              "type": "dropdown",
-              "name": "spørsmål16",
-              "title": "Materiale",
-              "titleLocation": "left",
-              "choices": [
-                "Item 1",
-                "Item 2",
-                "Item 3"
-              ]
-            },
-            {
-              "type": "panel",
-              "name": "spørsmål17",
-              "questionTitleWidth": "100px",
-              "elements": [
-                {
-                  "type": "radiogroup",
-                  "name": "spørsmål18",
-                  "title": "Demping",
-                  "titleLocation": "left",
-                  "choices": [
-                    {
-                      "value": "Item 1",
-                      "text": "Ja"
-                    },
-                    {
-                      "value": "Item 2",
-                      "text": "Nei"
-                    }
-                  ],
-                  "showOtherItem": true,
-                  "colCount": 4
-                },
-                {
-                  "type": "radiogroup",
-                  "name": "spørsmål20",
-                  "title": "Utfylling",
-                  "titleLocation": "left",
-                  "choices": [
-                    {
-                      "value": "Item 1",
-                      "text": "Ja"
-                    },
-                    {
-                      "value": "Item 2",
-                      "text": "Nei"
-                    }
-                  ],
-                  "colCount": 4
-                },
-                {
-                  "type": "radiogroup",
-                  "name": "spørsmål19",
-                  "title": "Bottom finish",
-                  "titleLocation": "left",
-                  "choices": [
-                    {
-                      "value": "Item 1",
-                      "text": "Ja"
-                    },
-                    {
-                      "value": "Item 2",
-                      "text": "Nei"
-                    }
-                  ],
-                  "colCount": 4
-                }
-              ]
-            },
-            {
-              "type": "text",
-              "name": "spørsmål21",
-              "title": "Trekk",
-              "titleLocation": "left"
-            },
-            {
-              "type": "dropdown",
-              "name": "spørsmål22",
-              "title": "Lagring av modell",
-              "titleLocation": "left",
-              "choices": [
-                "Item 1",
-                "Item 2",
-                "Item 3"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "side2",
-      "elements": [
-        {
-          "type": "text",
-          "name": "spørsmål24"
-        },
-        {
-          "type": "radiogroup",
-          "name": "spørsmål25",
-          "choices": [
-            "Item 1",
-            "Item 2",
-            "Item 3"
-          ]
-        },
-        {
-          "type": "rating",
-          "name": "spørsmål26"
-        },
-        {
-          "type": "boolean",
-          "name": "spørsmål27"
-        },
-        {
-          "type": "checkbox",
-          "name": "spørsmål28",
-          "choices": [
-            "Item 1",
-            "Item 2",
-            "Item 3"
-          ]
-        },
-        {
-          "type": "matrix",
-          "name": "spørsmål29",
-          "columns": [
-            "Kolonne 1",
-            "Kolonne 2",
-            "Kolonne 3"
-          ],
-          "rows": [
-            "Rad 1",
-            "Rad 2"
-          ]
-        },
-        {
-          "type": "panel",
-          "name": "spørsmål30",
-          "elements": [
-            {
-              "type": "text",
-              "name": "spørsmål31"
-            },
-            {
-              "type": "tagbox",
-              "name": "spørsmål32",
-              "choices": [
-                "Item 1",
-                "Item 2",
-                "Item 3"
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "showNavigationButtons": "none",
-  "showQuestionNumbers": "off",
-  "showTitle": false,
-  "clearInvisibleValues": "onHidden",
-  "checkErrorsMode": "onValueChanged",
-  "questionsOnPageMode": "singlePage"
-}`
+init(JSON.stringify({
+  value: `{
+"title": "Målskjema",
+"logoPosition": "right",
+"pages": [
+  {
+    "name": "side1",
+    "title": "",
+    "elements": [
+      {
+        "type": "radiogroup",
+        "name": "spørsmål6",
+        "title": "Type",
+        "titleLocation": "left",
+        "validerFraFilemaker": true,
+        "choices": [
+          {
+            "value": "Item 1",
+            "text": "OAS"
+          },
+          {
+            "value": "Item 2",
+            "text": "OIL"
+          }
+        ]
+      },
+      {
+        "type": "panel",
+        "name": "panel1",
+        "questionTitleWidth": "100px",
+        "title": "Sko",
+        "elements": [
+          {
+            "type": "text",
+            "name": "spørsmål1",
+            "title": "Modell",
+            "titleLocation": "left"
+          },
+          {
+            "type": "text",
+            "name": "spørsmål2",
+            "title": "Farge",
+            "titleLocation": "left"
+          },
+          {
+            "type": "text",
+            "name": "spørsmål3",
+            "title": "Størrelse",
+            "titleLocation": "left"
+          },
+          {
+            "type": "text",
+            "name": "spørsmål4",
+            "title": "Lest",
+            "titleLocation": "left"
+          },
+          {
+            "type": "text",
+            "name": "spørsmål5",
+            "title": "Såle",
+            "titleLocation": "left"
+          },
+          {
+            "type": "comment",
+            "name": "spørsmål7",
+            "title": "Pasninger/ endringer",
+            "titleLocation": "left"
+          }
+        ]
+      },
+      {
+        "type": "panel",
+        "name": "panel2",
+        "questionTitleWidth": "100px",
+        "title": "Fotseng",
+        "startWithNewLine": false,
+        "elements": [
+          {
+            "type": "dropdown",
+            "name": "spørsmål14",
+            "title": "Type avstøp",
+            "titleLocation": "left",
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          },
+          {
+            "type": "radiogroup",
+            "name": "spørsmål15",
+            "titleLocation": "hidden",
+            "choices": [
+              {
+                "value": "Item 1",
+                "text": "Ny"
+              },
+              {
+                "value": "Item 2",
+                "text": "Gammel"
+              },
+              {
+                "value": "Item 3",
+                "text": "Remodellert"
+              }
+            ],
+            "colCount": 3
+          },
+          {
+            "type": "panel",
+            "name": "spørsmål23",
+            "elements": [
+              {
+                "type": "text",
+                "name": "spørsmål8",
+                "title": "Tverrpute",
+                "titleLocation": "left"
+              },
+              {
+                "type": "text",
+                "name": "spørsmål9",
+                "title": "Gelenk",
+                "titleLocation": "left"
+              },
+              {
+                "type": "text",
+                "name": "spørsmål10",
+                "title": "Kile",
+                "titleLocation": "left"
+              },
+              {
+                "type": "text",
+                "name": "spørsmål11",
+                "title": "Skostørrelse",
+                "titleLocation": "left"
+              },
+              {
+                "type": "text",
+                "name": "spørsmål12",
+                "title": "Lesteomriss",
+                "titleLocation": "left"
+              }
+            ]
+          },
+          {
+            "type": "radiogroup",
+            "name": "spørsmål13",
+            "title": "PPT",
+            "titleLocation": "left",
+            "choices": [
+              {
+                "value": "Item 1",
+                "text": "1,5mm"
+              },
+              {
+                "value": "Item 2",
+                "text": "3mm"
+              },
+              {
+                "value": "Item 3",
+                "text": "6mm"
+              }
+            ],
+            "showOtherItem": true,
+            "colCount": 4
+          },
+          {
+            "type": "dropdown",
+            "name": "spørsmål16",
+            "title": "Materiale",
+            "titleLocation": "left",
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          },
+          {
+            "type": "panel",
+            "name": "spørsmål17",
+            "questionTitleWidth": "100px",
+            "elements": [
+              {
+                "type": "radiogroup",
+                "name": "spørsmål18",
+                "title": "Demping",
+                "titleLocation": "left",
+                "choices": [
+                  {
+                    "value": "Item 1",
+                    "text": "Ja"
+                  },
+                  {
+                    "value": "Item 2",
+                    "text": "Nei"
+                  }
+                ],
+                "showOtherItem": true,
+                "colCount": 4
+              },
+              {
+                "type": "radiogroup",
+                "name": "spørsmål20",
+                "title": "Utfylling",
+                "titleLocation": "left",
+                "choices": [
+                  {
+                    "value": "Item 1",
+                    "text": "Ja"
+                  },
+                  {
+                    "value": "Item 2",
+                    "text": "Nei"
+                  }
+                ],
+                "colCount": 4
+              },
+              {
+                "type": "radiogroup",
+                "name": "spørsmål19",
+                "title": "Bottom finish",
+                "titleLocation": "left",
+                "choices": [
+                  {
+                    "value": "Item 1",
+                    "text": "Ja"
+                  },
+                  {
+                    "value": "Item 2",
+                    "text": "Nei"
+                  }
+                ],
+                "colCount": 4
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "name": "spørsmål21",
+            "title": "Trekk",
+            "titleLocation": "left"
+          },
+          {
+            "type": "dropdown",
+            "name": "spørsmål22",
+            "title": "Lagring av modell",
+            "titleLocation": "left",
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "side2",
+    "elements": [
+      {
+        "type": "text",
+        "name": "spørsmål24"
+      },
+      {
+        "type": "radiogroup",
+        "name": "spørsmål25",
+        "choices": [
+          "Item 1",
+          "Item 2",
+          "Item 3"
+        ]
+      },
+      {
+        "type": "rating",
+        "name": "spørsmål26"
+      },
+      {
+        "type": "boolean",
+        "name": "spørsmål27"
+      },
+      {
+        "type": "checkbox",
+        "name": "spørsmål28",
+        "choices": [
+          "Item 1",
+          "Item 2",
+          "Item 3"
+        ]
+      },
+      {
+        "type": "matrix",
+        "name": "spørsmål29",
+        "columns": [
+          "Kolonne 1",
+          "Kolonne 2",
+          "Kolonne 3"
+        ],
+        "rows": [
+          "Rad 1",
+          "Rad 2"
+        ]
+      },
+      {
+        "type": "panel",
+        "name": "spørsmål30",
+        "elements": [
+          {
+            "type": "text",
+            "name": "spørsmål31"
+          },
+          {
+            "type": "tagbox",
+            "name": "spørsmål32",
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+],
+"showNavigationButtons": "none",
+"showQuestionNumbers": "off",
+"checkErrorsMode": "onValueChanged",
+"clearInvisibleValues": "onHidden",
+"questionsOnPageMode": "singlePage"
+}`, type: "viewer", compact: true
+,scriptNames: {
+  validate: "asdasdad"
+}}))

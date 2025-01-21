@@ -46,6 +46,8 @@ const FormViewer: FC = () => {
         }
 
         const validateQuestion = (_: any, options: any) => {
+            console.log(options.question, options.question.validateFromFilemaker, options.question.validerFraFilemaker);
+
             if (
                 options.question && 
                 config.scriptNames?.validate && 
@@ -54,14 +56,18 @@ const FormViewer: FC = () => {
                     options.question.validerFraFilemaker
                 )
             ) {
-                fetchFromFileMaker(config.scriptNames.validate, {
-                    name: options.question.name,
-                    value: options.value as string,
-                }).then((res) => {
+                console.log("Validating question using filemaker.");
+
+                options.error = "Nuh uh.";
+
+                // fetchFromFileMaker(config.scriptNames.validate, {
+                //     name: options.question.name,
+                //     value: options.value as string,
+                // }).then((res) => {
                     
-                }).catch((e) => {
-                    warn("Failed to validate question usinmg filemaker.", e);
-                });
+                // }).catch((e) => {
+                //     warn("Failed to validate question usinmg filemaker.", e);
+                // });
             }
         };
 

@@ -64,17 +64,13 @@ const FormBuilder: FC = () => {
             }
         }
 
-        if (config.locale == "en" && config.scriptNames?.validate) {
-            Serializer.removeProperty("question", "validerFraFilemaker");
+        if (config.scriptNames?.validate) {
             Serializer.addProperty("question", {
-                name:"validateFromFilemaker", 
-                category: "validation",
-                type: "boolean",
-            });
-        } else if (config.locale == "no" && config.scriptNames?.validate) {
-            Serializer.removeProperty("question", "validateFromFilemaker");
-            Serializer.addProperty("question", {
-                name:"validerFraFilemaker", 
+                name: "validateFromFilemaker:boolean",
+                displayName: config.locale == "en" ? "Validate from FileMaker" : "Valider fra FileMaker",
+                dependsOn: "validate",
+                default: false,
+                visible: true,
                 category: "validation",
                 type: "boolean",
             });
