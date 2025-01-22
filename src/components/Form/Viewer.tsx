@@ -45,8 +45,20 @@ const FormViewer: FC = () => {
             setConfig({ ...config, answerData: JSON.stringify(data) });
         }
 
+        if (config.scriptNames?.validate) {
+            console.log(Serializer.getAllPropertiesByName("question"))
+            // Serializer.addProperty("question", {
+            //     name: "validateFromFilemaker",
+            //     displayName: config.locale == "en" ? "Validate from FileMaker" : "Valider fra FileMaker",
+            //     default: false,
+            //     visible: true,
+            //     category: "validation",
+            //     type: "boolean",
+            // });
+        }
+
         const validateQuestion = (_: any, options: any) => {
-            console.log(options.question, options.question.validateFromFilemaker, options.question.validerFraFilemaker);
+            console.log(options.question, options.question.validateFromFilemaker);
 
             if (
                 options.question && 

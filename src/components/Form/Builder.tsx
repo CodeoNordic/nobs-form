@@ -66,9 +66,8 @@ const FormBuilder: FC = () => {
 
         if (config.scriptNames?.validate) {
             Serializer.addProperty("question", {
-                name: "validateFromFilemaker:boolean",
+                name: "validateFromFilemaker",
                 displayName: config.locale == "en" ? "Validate from FileMaker" : "Valider fra FileMaker",
-                dependsOn: "validate",
                 default: false,
                 visible: true,
                 category: "validation",

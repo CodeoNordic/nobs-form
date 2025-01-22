@@ -893,3 +893,36 @@ init(JSON.stringify({
 ,scriptNames: {
   validate: "asdasdad"
 }}))
+
+
+{
+  "title": "Målskjema",
+  "logoPosition": "right",
+  "pages": [
+    {
+      "name": "side1",
+      "title": "",
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "spørsmål6",
+          "title": "Type",
+          "titleLocation": "left",
+          "validateFromFilemaker": true,
+          "choices": [
+            {
+              "value": "Item 1",
+              "text": "OAS"
+            },
+            {
+              "value": "Item 2",
+              "text": "OIL"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "checkErrorsMode": "onValueChanged"
+}
+
