@@ -27,7 +27,7 @@ const Form: FC = () => {
                 ? <FormBuilder /> 
                 : config.type === "visualizer" 
                     ? <FormVisualizer /> 
-                    : <div className={config.compact ? "compact" : ""}>
+                    : <div className={`formviewer ${config.compact ? "compact" : ""}`}>
                         <FormViewer />
                     </div>
             }

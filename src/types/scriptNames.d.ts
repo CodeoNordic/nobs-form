@@ -4,8 +4,9 @@ declare global {
             /** Script to be ran when autosave triggers */
             autoSave?: string;
 
-            /** Script to be ran to validate a question. Return true if valid, false if not. */
-            /** Can also return a string with an error message */
+            /** Script to be ran to validate a question. Return true if valid, false if not.
+             *  Can also return a string with an error message
+             */
             validate?: string;
 
             /** Script to be ran when a question is answered */

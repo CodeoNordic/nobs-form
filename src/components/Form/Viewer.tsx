@@ -14,6 +14,17 @@ const FormViewer: FC = () => {
 
     // useMemo so you can choose when to re-render
     const survey = useMemo(() => {
+        if (config.scriptNames?.validate) { // needs to happen before creating the survey
+            Serializer.addProperty("question", {
+                name: "validateFromFilemaker",
+                displayName: config.locale == "en" ? "Validate from FileMaker" : "Valider fra FileMaker",
+                default: false,
+                visible: true,
+                category: "validation",
+                type: "boolean",
+            });
+        }
+
         const newSurvey = new Model(config.value);
 
         // Attempt to add existing answer data
@@ -42,41 +53,38 @@ const FormViewer: FC = () => {
                 performScript("onChange", { result: data });
             }
 
+            console.log(config.compact);
+
             setConfig({ ...config, answerData: JSON.stringify(data) });
         }
 
-        if (config.scriptNames?.validate) {
-            console.log(Serializer.getAllPropertiesByName("question"))
-            // Serializer.addProperty("question", {
-            //     name: "validateFromFilemaker",
-            //     displayName: config.locale == "en" ? "Validate from FileMaker" : "Valider fra FileMaker",
-            //     default: false,
-            //     visible: true,
-            //     category: "validation",
-            //     type: "boolean",
-            // });
-        }
-
         const validateQuestion = (_: any, options: any) => {
-            console.log(options.question, options.question.validateFromFilemaker);
-
             if (
                 options.question && 
                 config.scriptNames?.validate && 
-                (
-                    options.question.validateFromFilemaker || 
-                    options.question.validerFraFilemaker
-                )
+                options.question.validateFromFilemaker 
             ) {
-                console.log("Validating question using filemaker.");
+                const randomValue = Math.random();
 
-                options.error = "Nuh uh.";
+                if (randomValue < 0.33) {
+                    options.error = config.locale === "en" ? "Invalid value." : "Ugyldig verdi.";
+                } else if (randomValue < 0.66) {
+                    options.error = config.locale === "en" ? "Random error occurred" : "Tilfeldig feil oppstod";
+                } else {
+                    options.error = null;
+                }
 
                 // fetchFromFileMaker(config.scriptNames.validate, {
                 //     name: options.question.name,
                 //     value: options.value as string,
                 // }).then((res) => {
-                    
+                //     if (typeof res === "string" && res === "false") {
+                //         options.error = config.locale == "en" ? "Invalid value." : "Ugyldig verdi.";
+                //     } else if (typeof res === "string" && res !== "true") {
+                //         options.error = res;
+                //     } else {
+                //         options.error = null;
+                //     }
                 // }).catch((e) => {
                 //     warn("Failed to validate question usinmg filemaker.", e);
                 // });

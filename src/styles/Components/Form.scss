@@ -2,9 +2,11 @@
     height: 100vh !important;
 }
 
-.compact {    
+.formviewer {
     height: 100vh !important;
-    
+}
+
+.compact {    
     .sd-element__content.sd-panel__content { // top and bottom of a panel
         padding-top: 5px !important;
         padding-bottom: 5px !important;
