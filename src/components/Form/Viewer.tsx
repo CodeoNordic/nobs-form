@@ -53,8 +53,6 @@ const FormViewer: FC = () => {
                 performScript("onChange", { result: data });
             }
 
-            console.log(config.compact);
-
             setConfig({ ...config, answerData: JSON.stringify(data) });
         }
 
@@ -64,30 +62,21 @@ const FormViewer: FC = () => {
                 config.scriptNames?.validate && 
                 options.question.validateFromFilemaker 
             ) {
-                const randomValue = Math.random();
-
-                if (randomValue < 0.33) {
-                    options.error = config.locale === "en" ? "Invalid value." : "Ugyldig verdi.";
-                } else if (randomValue < 0.66) {
-                    options.error = config.locale === "en" ? "Random error occurred" : "Tilfeldig feil oppstod";
-                } else {
+                fetchFromFileMaker(config.scriptNames.validate, {
+                    name: options.question.name,
+                    value: options.value as string,
+                }, undefined, true, 30000).then((res) => {
+                    if (typeof res === "string" && res === "false") {
+                        options.error = config.locale == "en" ? "Invalid value." : "Ugyldig verdi.";
+                    } else if (typeof res === "string" && res !== "true") {
+                        options.error = res;
+                    } else {
+                        options.error = null;
+                    }
+                }).catch((e) => {
+                    warn("Failed to validate question usinmg filemaker.", e);
                     options.error = null;
-                }
-
-                // fetchFromFileMaker(config.scriptNames.validate, {
-                //     name: options.question.name,
-                //     value: options.value as string,
-                // }).then((res) => {
-                //     if (typeof res === "string" && res === "false") {
-                //         options.error = config.locale == "en" ? "Invalid value." : "Ugyldig verdi.";
-                //     } else if (typeof res === "string" && res !== "true") {
-                //         options.error = res;
-                //     } else {
-                //         options.error = null;
-                //     }
-                // }).catch((e) => {
-                //     warn("Failed to validate question usinmg filemaker.", e);
-                // });
+                });
             }
         };
 
@@ -120,7 +109,7 @@ const FormViewer: FC = () => {
         });
         
         return newSurvey;
-    }, [config.value, config.locale]);
+    }, [config.value, config.locale, config.compact, config.scriptNames]);
 
     console.log("render viewer");
 
