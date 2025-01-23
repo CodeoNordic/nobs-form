@@ -82,7 +82,7 @@ const FormViewer: FC = () => {
 
         newSurvey.onValidateQuestion.add(validateQuestion);
 
-        newSurvey.onValueChanged.add((result, options) => {
+        newSurvey.onValueChanged.add((result) => {
             saveAnswerData(result);
         });
         
@@ -109,7 +109,7 @@ const FormViewer: FC = () => {
         });
         
         return newSurvey;
-    }, [config.value, config.locale, config.compact, config.scriptNames]);
+    }, [config.value, config.locale, config.compact, config.scriptNames]); // Add deps that should trigger a re-render
 
     console.log("render viewer");
 
