@@ -13,6 +13,18 @@ const FormBuilder: FC = () => {
 
     // useMemo so you can choose when to re-render
     const creator = useMemo(() => {
+        if (config.scriptNames?.validate) {
+            Serializer.removeProperty("question", "validateFromFilemaker");
+            Serializer.addProperty("question", {
+                name: "validateFromFilemaker",
+                displayName: config.locale == "en" ? "Validate from FileMaker" : "Valider fra FileMaker",
+                default: false,
+                visible: true,
+                category: "validation",
+                type: "boolean",
+            });
+        }
+
         const validatedQuestionTypes = Array.isArray(config.creatorOptions?.questionTypes) && config.creatorOptions?.questionTypes.length > 0
                 ? config.creatorOptions?.questionTypes 
                 : [];
@@ -62,17 +74,6 @@ const FormBuilder: FC = () => {
                 // fallback if the JSON is invalid
                 newCreator.text = config.value;
             }
-        }
-
-        if (config.scriptNames?.validate) {
-            Serializer.addProperty("question", {
-                name: "validateFromFilemaker",
-                displayName: config.locale == "en" ? "Validate from FileMaker" : "Valider fra FileMaker",
-                default: false,
-                visible: true,
-                category: "validation",
-                type: "boolean",
-            });
         }
 
         // Autosave function
