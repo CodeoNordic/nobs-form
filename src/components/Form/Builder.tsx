@@ -25,27 +25,34 @@ const FormBuilder: FC = () => {
             });
         }
 
-        const validatedQuestionTypes = Array.isArray(config.creatorOptions?.questionTypes) && config.creatorOptions?.questionTypes.length > 0
+        const validatedQuestionTypes = Array.isArray(config.creatorOptions?.questionTypes) 
+            && config.creatorOptions?.questionTypes.length > 0
                 ? config.creatorOptions?.questionTypes 
                 : [];
 
         const creatorOptions = {
             isAutoSave: true,
             questionTypes: validatedQuestionTypes,
-            ...(config.creatorOptions?.tabs && typeof config.creatorOptions?.tabs == "boolean" ? {
-                showLogicTab: true,
-                showJSONEditorTab: true,
-                showTestSurveyTab: true
-            } : ( config.creatorOptions?.tabs && Array.isArray(config.creatorOptions?.tabs) && config.creatorOptions?.tabs.length > 0 ? {
-                showLogicTab: config.creatorOptions.tabs.includes("logic"),
-                showJSONEditorTab: config.creatorOptions.tabs.includes("json"),
-                showTestSurveyTab: config.creatorOptions.tabs.includes("preview")
-            } : {
-                showLogicTab: false, 
-                showJSONEditorTab: false, 
-                showTestSurveyTab: false 
-            })),
-            showElementEditorAs: "form",
+            ...(
+                config.creatorOptions?.tabs && typeof config.creatorOptions?.tabs == "boolean" ? {
+                    showLogicTab: true,
+                    showJSONEditorTab: true,
+                    showTestSurveyTab: true
+                } : ( 
+                    config.creatorOptions?.tabs 
+                        && Array.isArray(config.creatorOptions?.tabs) 
+                        && config.creatorOptions?.tabs.length > 0 
+                    ? {
+                        showLogicTab: config.creatorOptions.tabs.includes("logic"),
+                        showJSONEditorTab: config.creatorOptions.tabs.includes("json"),
+                        showTestSurveyTab: config.creatorOptions.tabs.includes("preview")
+                    } : {
+                        showLogicTab: false, 
+                        showJSONEditorTab: false, 
+                        showTestSurveyTab: false 
+                    }
+                )
+            )
         };
 
         // Because it's "nb" instead of "no"
