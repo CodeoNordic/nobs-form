@@ -26,10 +26,10 @@ const Form: FC = () => {
             {config.type === "builder" 
                 ? <FormBuilder /> 
                 : config.type === "visualizer" 
-                    ? <FormVisualizer /> 
-                    : <div className={`formviewer ${config.compact ? "compact" : ""}`}>
-                        <FormViewer />
-                    </div>
+                ? <FormVisualizer /> 
+                : <div className={`formviewer ${config.compact ? "compact" : ""}`}>
+                    <FormViewer />
+                </div>
             }
         </>
     )
