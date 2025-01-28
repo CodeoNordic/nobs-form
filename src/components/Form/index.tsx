@@ -21,18 +21,14 @@ const Form: FC = () => {
     
     console.log("render form");
 
-    return (
-        <>
-            {config.type === "builder" 
-                ? <FormBuilder /> 
-                : config.type === "visualizer" 
-                ? <FormVisualizer /> 
-                : <div className={`formviewer ${config.compact ? "compact" : ""}`}>
-                    <FormViewer />
-                </div>
-            }
-        </>
-    )
+    return config.type === "builder" 
+        ? <FormBuilder /> 
+        : config.type === "visualizer" 
+        ? <FormVisualizer /> 
+        : <div className={`formviewer ${config.compact ? "compact" : ""}`}>
+            <FormViewer />
+        </div>;
+            
 }
 
 export default Form;
