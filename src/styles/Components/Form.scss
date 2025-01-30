@@ -81,7 +81,23 @@
     // }
 
     .sd-element__title span {
-        font-size: xx-small !important;
+        font-size: x-small !important;
+    }
+
+    .sd-item__control-label {
+        font-size: x-small !important;
+    }
+
+    .sd-dropdown__value {
+        font-size: x-small !important;
+    }
+
+    .sd-dropdown__filter-string-input {
+        font-size: x-small !important;
+    }
+
+    .sd-input {
+        font-size: x-small !important;
     }
 
     color: red !important;
