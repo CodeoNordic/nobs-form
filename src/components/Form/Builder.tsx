@@ -110,7 +110,7 @@ const FormBuilder: FC = () => {
         });
     }
 
-    console.log("render builder");
+    console.log("render builder", Date.now());
 
     return <SurveyCreatorComponent creator={creator} />;
 }

@@ -100,8 +100,14 @@
         font-size: x-small !important;
     }
 
-    color: red !important;
-    
+    .sv-string-viewer {
+        font-size: x-small !important;
+    }
+
+    .sd-list__item-body { // needs some padding for text to be visible
+        padding: 0 0 0 2px !important;
+    }
+
     .sd-element__content.sd-panel__content { // top and bottom of a panel
         padding-top: 0px !important;
         padding-bottom: 0px !important;

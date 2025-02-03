@@ -111,7 +111,7 @@ const FormViewer: FC = () => {
         return newSurvey;
     }, [config.value, config.locale, config.compact, config.scriptNames]); // Add deps that should trigger a re-render
 
-    console.log("render viewer");
+    console.log("render viewer", Date.now());
 
     return <Survey model={survey} />;
 }

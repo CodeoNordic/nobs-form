@@ -40,7 +40,7 @@ const FormVisualizer: FC = () => {
         }
     }, [survey, config.answers, config.locale, config.visualizerOptions]);
 
-    console.log("render visualizer");
+    console.log("render visualizer", Date.now());
 
     return <div id="visualizer" />;
 }

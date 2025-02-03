@@ -19,7 +19,7 @@ const Form: FC = () => {
         return null
     }
     
-    console.log("render form");
+    console.log("render form", Date.now());
 
     return config.type === "builder" 
         ? <FormBuilder /> 
