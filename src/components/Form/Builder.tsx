@@ -25,27 +25,27 @@ const FormBuilder: FC = () => {
             });
         }
 
-        const validatedQuestionTypes = Array.isArray(config.creatorOptions?.questionTypes) 
-            && config.creatorOptions?.questionTypes.length > 0
-                ? config.creatorOptions?.questionTypes 
+        const validatedQuestionTypes = Array.isArray(config.questionTypes) 
+            && config.questionTypes.length > 0
+                ? config.questionTypes 
                 : [];
 
         const creatorOptions = {
             isAutoSave: true,
             questionTypes: validatedQuestionTypes,
             ...(
-                config.creatorOptions?.tabs && typeof config.creatorOptions?.tabs == "boolean" ? {
+                config.tabs && typeof config.tabs == "boolean" ? {
                     showLogicTab: true,
                     showJSONEditorTab: true,
                     showTestSurveyTab: true
                 } : ( 
-                    config.creatorOptions?.tabs 
-                        && Array.isArray(config.creatorOptions?.tabs) 
-                        && config.creatorOptions?.tabs.length > 0 
+                    config.tabs 
+                        && Array.isArray(config.tabs) 
+                        && config.tabs.length > 0 
                     ? {
-                        showLogicTab: config.creatorOptions.tabs.includes("logic"),
-                        showJSONEditorTab: config.creatorOptions.tabs.includes("json"),
-                        showTestSurveyTab: config.creatorOptions.tabs.includes("preview")
+                        showLogicTab: config.tabs.includes("logic"),
+                        showJSONEditorTab: config.tabs.includes("json"),
+                        showTestSurveyTab: config.tabs.includes("preview")
                     } : {
                         showLogicTab: false, 
                         showJSONEditorTab: false, 
@@ -68,7 +68,7 @@ const FormBuilder: FC = () => {
         const newCreator = new SurveyCreator(creatorOptions);
 
         // Hide question types if set to false or empty array
-        if (config.creatorOptions?.questionTypes === false || (Array.isArray(config.creatorOptions?.questionTypes) && config.creatorOptions?.questionTypes.length === 0)) {
+        if (config.questionTypes === false || (Array.isArray(config.questionTypes) && config.questionTypes.length === 0)) {
             newCreator.toolbox.clearItems();
         }
 
@@ -98,14 +98,14 @@ const FormBuilder: FC = () => {
         };
         
         return newCreator;
-    }, [config.locale, config.creatorOptions?.questionTypes, config.creatorOptions?.tabs]); // Add deps that should trigger a re-render
+    }, [config.locale, config.questionTypes, config.tabs]); // Add deps that should trigger a re-render
     
     // Show only the selected properties in the property grid
-    if (creator && config.creatorOptions?.propertyGrid) {
+    if (creator && config.propertyGrid) {
         creator.onShowingProperty.add(function (_, options) {
-            options.canShow = config.creatorOptions?.propertyGrid === true || (
-                Array.isArray(config.creatorOptions?.propertyGrid) 
-                    && config.creatorOptions?.propertyGrid.indexOf(options.property.name) > -1
+            options.canShow = config.propertyGrid === true || (
+                Array.isArray(config.propertyGrid) 
+                    && config.propertyGrid.indexOf(options.property.name) > -1
             );
         });
     }

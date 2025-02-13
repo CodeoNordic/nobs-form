@@ -3,14 +3,11 @@ import { loadCallbacks } from '@utils/performScript';
 import { warn } from '@utils/log';
 
 const defaultConfig: Partial<Form.Config> = {
-    type: 'builder',
     locale: 'no',
-    creatorOptions: {
-        questionTypes: true,
-        propertyGrid: true,
-        tabs: true,
-        isAutoSave: true
-    },
+    questionTypes: true,
+    propertyGrid: true,
+    tabs: true,
+    isAutoSave: true
 };
 
 // Parses the JSON from FileMaker into a readable config
@@ -46,17 +43,10 @@ window.init = cfg => {
 
 // Validates the config object every time it's set or updated
 const validateConfig = (config: any): Form.Config => {
-    const validTypes = ['builder', 'viewer', 'visualizer'];
     const validLocales = ['en', 'no'];
     const validTabs = ['logic', 'json', 'preview'];
 
     const validatedConfig = { ...defaultConfig, ...config };
-  
-    // Validate 'type'
-    if (!validTypes.includes(validatedConfig.type)) {
-      warn(`Invalid form type "${validatedConfig.type}", defaulting to "${defaultConfig.type}"`);
-      validatedConfig.type = defaultConfig.type;
-    }
   
     // Validate 'locale'
     if (!validLocales.includes(validatedConfig.locale)) {
@@ -95,33 +85,33 @@ const validateConfig = (config: any): Form.Config => {
         }
     }
 
-    if (config.creatorOptions.questionTypes) {
+    if (config.questionTypes) {
         try {
-            if (!Array.isArray(config.creatorOptions.questionTypes) && typeof config.creatorOptions.questionTypes !== 'boolean') {
+            if (!Array.isArray(config.questionTypes) && typeof config.questionTypes !== 'boolean') {
                 throw new Error("Not an array or boolean");
             }
         } catch (e) {
             warn("Failed to parse question types, defaulting to true (show all)", e);
-            validatedConfig.creatorOptions.questionTypes = true;
+            validatedConfig.questionTypes = true;
         }
     }
 
-    if (config.creatorOptions.propertyGrid) {
+    if (config.propertyGrid) {
         try {
-            if (!Array.isArray(config.creatorOptions.propertyGrid) && typeof config.creatorOptions.propertyGrid !== 'boolean') {
+            if (!Array.isArray(config.propertyGrid) && typeof config.propertyGrid !== 'boolean') {
                 throw new Error("Not an array or boolean");
             }
         } catch (e) {
             warn("Failed to parse question types, defaulting to true (show all)", e);
-            validatedConfig.creatorOptions.propertyGrid = true;
+            validatedConfig.propertyGrid = true;
         }
     }
 
-    if (config.creatorOptions.tabs) {
-        if (typeof config.creatorOptions.tabs === 'boolean') {
-            validatedConfig.creatorOptions.tabs = config.creatorOptions.tabs;
-        } else if (Array.isArray(config.creatorOptions.tabs)) {
-            const filteredTabs = config.creatorOptions.tabs.filter((tab: string) => {
+    if (config.tabs) {
+        if (typeof config.tabs === 'boolean') {
+            validatedConfig.tabs = config.tabs;
+        } else if (Array.isArray(config.tabs)) {
+            const filteredTabs = config.tabs.filter((tab: string) => {
                 if (!validTabs.includes(tab)) {
                     warn(`Invalid tab for creator "${tab}", won't use`);
                     return false;
@@ -131,15 +121,15 @@ const validateConfig = (config: any): Form.Config => {
         
             // Only update if there's an actual difference, to avoid unnecessary re-renders
             if (
-                !Array.isArray(validatedConfig.creatorOptions.tabs) ||
-                filteredTabs.length !== validatedConfig.creatorOptions.tabs.length ||
-                filteredTabs.some((t: string, i: number) => t !== validatedConfig.creatorOptions.tabs[i])
+                !Array.isArray(validatedConfig.tabs) ||
+                filteredTabs.length !== validatedConfig.tabs.length ||
+                filteredTabs.some((t: string, i: number) => t !== validatedConfig.tabs[i])
             ) {
-                validatedConfig.creatorOptions.tabs = filteredTabs;
+                validatedConfig.tabs = filteredTabs;
             }
         } else  {
             warn("Invalid tabs for creator, defaulting to true (show all)");
-            validatedConfig.creatorOptions.tabs = true;
+            validatedConfig.tabs = true;
         }
     }
   
