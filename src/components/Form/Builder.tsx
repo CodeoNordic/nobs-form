@@ -75,7 +75,6 @@ const FormBuilder: FC = () => {
         if (config.value) {
             try {
                 const surveyJson = JSON.parse(config.value);
-                surveyJson.clearInvisibleValues = "onHidden";
                 newCreator.JSON = surveyJson;
             } catch (e) {
                 // fallback if the JSON is invalid
@@ -111,7 +110,7 @@ const FormBuilder: FC = () => {
             );
         });
 
-        creator.onPageAdded.add(function (sender, options) {
+        creator.onPageAdded.add(function (_, options) {
             const page = options.page;
           
             if (config.defaultValues?.question) {
@@ -123,7 +122,7 @@ const FormBuilder: FC = () => {
         });
 
         
-        creator.onQuestionAdded.add((sender, options) => {
+        creator.onQuestionAdded.add((_, options) => {
             const question = options.question;
           
             if (config.defaultValues?.question) {
