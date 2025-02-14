@@ -81,6 +81,8 @@ const FormBuilder: FC = () => {
                 // fallback if the JSON is invalid
                 newCreator.text = config.value;
             }
+        } else if (config.defaultValues?.survey) {
+            newCreator.JSON = config.defaultValues.survey;
         }
 
         // Autosave function
@@ -109,8 +111,15 @@ const FormBuilder: FC = () => {
             );
         });
 
-        creator.onPageAdded.add(function (_, options) {
-            console.log("page added", options);
+        creator.onPageAdded.add(function (sender, options) {
+            const page = options.page;
+          
+            if (config.defaultValues?.question) {
+                Object.entries(config.defaultValues.page).forEach(([key, value]) => {
+                    (page as any)[key] = value;
+                });
+            }
+
         });
 
         
@@ -119,7 +128,6 @@ const FormBuilder: FC = () => {
           
             if (config.defaultValues?.question) {
                 Object.entries(config.defaultValues.question).forEach(([key, value]) => {
-                    console.log("setting", key, value);
                     question[key] = value;
                 });
             }

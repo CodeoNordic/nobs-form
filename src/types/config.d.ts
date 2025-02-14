@@ -19,6 +19,8 @@ declare global {
                 question?: any;
                 // The default values to use when creating a new page
                 page?: any;
+                // The default values to use when creating a new survey
+                survey?: any;
             };
 
             // The types of questions that can be added to the form
