@@ -108,6 +108,22 @@ const FormBuilder: FC = () => {
                     && config.propertyGrid.indexOf(options.property.name) > -1
             );
         });
+
+        creator.onPageAdded.add(function (_, options) {
+            console.log("page added", options);
+        });
+
+        
+        creator.onQuestionAdded.add((sender, options) => {
+            const question = options.question;
+          
+            if (config.defaultValues?.question) {
+                Object.entries(config.defaultValues.question).forEach(([key, value]) => {
+                    console.log("setting", key, value);
+                    question[key] = value;
+                });
+            }
+        });
     }
 
     console.log("render builder", Date.now());
