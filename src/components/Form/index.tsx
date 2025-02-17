@@ -6,9 +6,11 @@ const Form: FC = () => {
     
     if (!config) return null;
     
-    console.log("render form");
-
-    return <FormBuilder /> 
+    return (
+        <div className={config.compact ? "compact" : ""}> 
+            <FormBuilder /> 
+        </div>
+    )
             
 }
 

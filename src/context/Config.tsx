@@ -62,28 +62,6 @@ const validateConfig = (config: any): Form.Config => {
             validatedConfig.value = '';
         }
     }
-    
-    if (config.answerData) {
-        try {
-            JSON.parse(config.answerData);
-        } catch (e) {
-            warn("Failed to parse answer data, will start with empty data.", e);
-            validatedConfig.answerData = '';
-        }
-    }
-
-    if (config.answers) {
-        try {
-            const data = JSON.parse(config.answers);
-            
-            if (!Array.isArray(data)) {
-                throw new Error("Not an array");
-            }
-        } catch (e) {
-            warn("Failed to parse previous answers, will start with empty array", e);
-            validatedConfig.answers = [];
-        }
-    }
 
     if (config.questionTypes) {
         try {

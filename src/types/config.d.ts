@@ -4,13 +4,6 @@ declare global {
             // The form data, in json format
             value?: string;
 
-            // The current answers to the form, updated along the way. 
-            // Use to continue where the user left off 
-            answerData?: string; 
-
-            // Array of all answers to the form, used for visualizing the form
-            answers?: string;
-
             // If the form should be compact or not
             compact?: boolean;
 
@@ -22,6 +15,9 @@ declare global {
                 // The default values to use when creating a new survey
                 survey?: any;
             };
+
+            // If an option to validate the form from FileMaker should be shown when creating a question
+            validateFromFileMaker?: boolean;
 
             // The types of questions that can be added to the form
             // True to show all, false to show none, or an array of types to show

@@ -1,7 +1,6 @@
 import { editorLocalization, SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
 import { surveyLocalization } from "survey-react-ui";
 import { useConfigState } from "@context/Config";
-import performScript from "@utils/performScript";
 import "survey-creator-core/i18n";
 import { useMemo } from "react";
 import { Serializer } from "survey-core";
@@ -13,10 +12,10 @@ const FormBuilder: FC = () => {
 
     // useMemo so you can choose when to re-render
     const creator = useMemo(() => {
-        if (config.scriptNames?.validate) {
-            Serializer.removeProperty("question", "validateFromFilemaker");
+        if (config.validateFromFileMaker) {
+            Serializer.removeProperty("question", "validateFromFileMaker");
             Serializer.addProperty("question", {
-                name: "validateFromFilemaker",
+                name: "validateFromFileMaker",
                 displayName: config.locale == "en" ? "Validate from FileMaker" : "Valider fra FileMaker",
                 default: false,
                 visible: true,
@@ -73,32 +72,25 @@ const FormBuilder: FC = () => {
         }
 
         if (config.value) {
-            try {
-                const surveyJson = JSON.parse(config.value);
-                newCreator.JSON = surveyJson;
-            } catch (e) {
-                // fallback if the JSON is invalid
-                newCreator.text = config.value;
+            const surveyJson = JSON.parse(config.value);
+            newCreator.JSON = surveyJson;
+        } else {
+            // Localizations for no
+            let surveyJson = config.locale === "no" ? {
+                completedHtml: "<h3>Takk for at du utførte undersøkelsen</h3>",
+                completedBeforeHtml: "<h3>Du har allerede gjort ferdig undersøkelsen.</h3>",
+                loadingHtml: "<h3>Laster undersøkelse...</h3>",
+                completeText: "Fullfør"
+            } : {};
+
+            if (config.defaultValues?.survey) {
+                surveyJson = { ...surveyJson, ...config.defaultValues.survey };
             }
-        } else if (config.defaultValues?.survey) {
-            // Set default survey if no value is set
-            newCreator.JSON = config.defaultValues.survey;
+
+            // Set default survey 
+            newCreator.JSON = surveyJson;
         }
 
-        // Autosave function
-        newCreator.saveSurveyFunc = (
-            saveNo: number,
-            callback: (no: number, isSuccess: boolean) => void
-        ) => {
-            if (config.scriptNames?.autoSave) {
-                performScript("autoSave", { value: newCreator.text });
-            }
-            if (newCreator.text !== config.value) {
-                setConfig({ ...config, value: newCreator.text });
-            }
-            callback(saveNo, true);
-        };
-        
         return newCreator;
     }, [config.locale, config.questionTypes, config.tabs]); // Add deps that should trigger a re-render
     
@@ -120,7 +112,6 @@ const FormBuilder: FC = () => {
                     (page as any)[key] = value;
                 });
             }
-
         });
 
         // Set default values for questions
@@ -134,8 +125,6 @@ const FormBuilder: FC = () => {
             }
         });
     }
-
-    console.log("render builder");
 
     return <SurveyCreatorComponent creator={creator} />;
 }
