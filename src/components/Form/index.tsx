@@ -6,7 +6,7 @@ const Form: FC = () => {
     
     if (!config) return null;
     
-    console.log("render form", Date.now());
+    console.log("render form");
 
     return <FormBuilder /> 
             

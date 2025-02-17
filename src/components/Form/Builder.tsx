@@ -81,6 +81,7 @@ const FormBuilder: FC = () => {
                 newCreator.text = config.value;
             }
         } else if (config.defaultValues?.survey) {
+            // Set default survey if no value is set
             newCreator.JSON = config.defaultValues.survey;
         }
 
@@ -101,8 +102,8 @@ const FormBuilder: FC = () => {
         return newCreator;
     }, [config.locale, config.questionTypes, config.tabs]); // Add deps that should trigger a re-render
     
-    // Show only the selected properties in the property grid
     if (creator && config.propertyGrid) {
+        // Show only the selected properties in the property grid
         creator.onShowingProperty.add(function (_, options) {
             options.canShow = config.propertyGrid === true || (
                 Array.isArray(config.propertyGrid) 
@@ -110,6 +111,7 @@ const FormBuilder: FC = () => {
             );
         });
 
+        // Set default values for pages
         creator.onPageAdded.add(function (_, options) {
             const page = options.page;
           
@@ -121,7 +123,7 @@ const FormBuilder: FC = () => {
 
         });
 
-        
+        // Set default values for questions
         creator.onQuestionAdded.add((_, options) => {
             const question = options.question;
           
@@ -133,7 +135,7 @@ const FormBuilder: FC = () => {
         });
     }
 
-    console.log("render builder", Date.now());
+    console.log("render builder");
 
     return <SurveyCreatorComponent creator={creator} />;
 }
