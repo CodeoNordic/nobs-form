@@ -1,12 +1,12 @@
 import { editorLocalization, SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
 import { surveyLocalization } from "survey-react-ui";
-import { useConfigState } from "@context/Config";
+import { useConfig } from "@context/Config";
 import "survey-creator-core/i18n";
 import { useMemo } from "react";
 import { Serializer } from "survey-core";
 
 const FormBuilder: FC = () => {
-    const [config, setConfig] = useConfigState();
+    const config = useConfig();
 
     if (!config) return null;
 
@@ -78,7 +78,7 @@ const FormBuilder: FC = () => {
             // Localizations for no
             let surveyJson = config.locale === "no" ? {
                 completedHtml: "<h3>Takk for at du utførte undersøkelsen</h3>",
-                completedBeforeHtml: "<h3>Du har allerede gjort ferdig undersøkelsen.</h3>",
+                completedBeforeHtml: "<h3>Du har allerede gjort ferdig undersøkelsen</h3>",
                 loadingHtml: "<h3>Laster undersøkelse...</h3>",
                 completeText: "Fullfør"
             } : {};
@@ -106,8 +106,8 @@ const FormBuilder: FC = () => {
         // Set default values for pages
         creator.onPageAdded.add(function (_, options) {
             const page = options.page;
-          
-            if (config.defaultValues?.question) {
+
+            if (page.elements.length === 0 && config.defaultValues?.page) {
                 Object.entries(config.defaultValues.page).forEach(([key, value]) => {
                     (page as any)[key] = value;
                 });
