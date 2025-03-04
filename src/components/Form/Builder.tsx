@@ -22,6 +22,7 @@ const FormBuilder: FC = () => {
                 category: "validation",
                 type: "boolean",
             });
+            // TODO: Add required before sending or something
         }
 
         const validatedQuestionTypes = Array.isArray(config.questionTypes) 
@@ -72,7 +73,7 @@ const FormBuilder: FC = () => {
         }
 
         if (config.value) {
-            const surveyJson = JSON.parse(config.value);
+            const surveyJson = JSON.parse(config.value); // TODO: Add try/catch and script call on errors
             newCreator.JSON = surveyJson;
         } else {
             // Localizations for no
