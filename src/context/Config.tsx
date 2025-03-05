@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { loadCallbacks } from '@utils/performScript';
+import performScript, { loadCallbacks } from '@utils/performScript';
 import { warn } from '@utils/log';
 
 const defaultConfig: Partial<Form.Config> = {
@@ -59,6 +59,11 @@ const validateConfig = (config: any): Form.Config => {
             JSON.parse(config.value);
         } catch (e) {
             warn("Failed to parse form value, will start with empty form.", e);
+            
+            if (config.scriptNames?.invalidJson) {
+                performScript(config.scriptNames.invalidJson);
+            }
+
             validatedConfig.value = '';
         }
     }
