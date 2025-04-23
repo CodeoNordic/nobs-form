@@ -90,7 +90,7 @@ const validateConfig = (config: any): Form.Config => {
         }
     }
 
-    if (config.tabs) {
+    if (config.tabs !== undefined) {
         if (typeof config.tabs === 'boolean') {
             validatedConfig.tabs = config.tabs;
         } else if (Array.isArray(config.tabs)) {
@@ -102,12 +102,7 @@ const validateConfig = (config: any): Form.Config => {
                 return true;
             });
         
-            // Only update if there's an actual difference, to avoid unnecessary re-renders
-            if (
-                !Array.isArray(validatedConfig.tabs) ||
-                filteredTabs.length !== validatedConfig.tabs.length ||
-                filteredTabs.some((t: string, i: number) => t !== validatedConfig.tabs[i])
-            ) {
+            if (filteredTabs.some((t: string, i: number) => t !== validatedConfig.tabs[i])) {
                 validatedConfig.tabs = filteredTabs;
             }
         } else  {
@@ -115,7 +110,7 @@ const validateConfig = (config: any): Form.Config => {
             validatedConfig.tabs = true;
         }
     }
-  
+
     // Add additional validation
   
     return validatedConfig;

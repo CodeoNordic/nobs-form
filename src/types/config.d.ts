@@ -7,12 +7,10 @@ declare global {
             // If the form should be compact or not
             compact?: boolean;
 
+            // Default values to use when creating a new question, page or survey
             defaultValues?: {
-                // The default values to use when creating a new question
                 question?: any;
-                // The default values to use when creating a new page
                 page?: any;
-                // The default values to use when creating a new survey
                 survey?: any;
             };
 
@@ -32,11 +30,12 @@ declare global {
 
             // Whether to show the extra creator tabs or not, can be an array of tabs to show
             // Possible tabs: "logic", "json", "preview"
-            tabs?: boolean|("logic"|"json"|"preview")[];
+            tabs: boolean|("logic"|"json"|"preview")[];
 
             // The language of the form, can be more if needed
             locale: "no"|"en";
 
+            // The script names to use for the form, used to run scripts in FileMaker
             scriptNames?: Form.ScriptNames;
             
             ignoreInfo: boolean;

@@ -4,6 +4,7 @@ import { useConfig } from "@context/Config";
 import "survey-creator-core/i18n";
 import { useMemo } from "react";
 import { Serializer } from "survey-core";
+import performScript from "@utils/performScript";
 
 const FormBuilder: FC = () => {
     const config = useConfig();
@@ -31,25 +32,18 @@ const FormBuilder: FC = () => {
                 : [];
 
         const creatorOptions = {
-            isAutoSave: true,
+            isAutoSave: config.isAutoSave,
             questionTypes: validatedQuestionTypes,
             ...(
-                config.tabs && typeof config.tabs == "boolean" ? {
-                    showLogicTab: true,
-                    showJSONEditorTab: true,
-                    showTestSurveyTab: true
+                typeof config.tabs == "boolean" ? {
+                    showLogicTab: config.tabs,
+                    showJSONEditorTab: config.tabs,
+                    showTestSurveyTab: config.tabs
                 } : ( 
-                    config.tabs 
-                        && Array.isArray(config.tabs) 
-                        && config.tabs.length > 0 
-                    ? {
+                    {
                         showLogicTab: config.tabs.includes("logic"),
                         showJSONEditorTab: config.tabs.includes("json"),
                         showTestSurveyTab: config.tabs.includes("preview")
-                    } : {
-                        showLogicTab: false, 
-                        showJSONEditorTab: false, 
-                        showTestSurveyTab: false 
                     }
                 )
             )
@@ -73,7 +67,7 @@ const FormBuilder: FC = () => {
         }
 
         if (config.value) {
-            const surveyJson = JSON.parse(config.value); // TODO: Add try/catch and script call on errors
+            const surveyJson = JSON.parse(config.value);
             newCreator.JSON = surveyJson;
         } else {
             // Localizations for no
@@ -88,16 +82,16 @@ const FormBuilder: FC = () => {
                 surveyJson = { ...surveyJson, ...config.defaultValues.survey };
             }
 
-            // Set default survey 
             newCreator.JSON = surveyJson;
         }
 
         return newCreator;
     }, [config.locale, config.questionTypes, config.tabs]); // Add deps that should trigger a re-render
     
-    if (creator && config.propertyGrid) {
+    if (creator) {
         // Show only the selected properties in the property grid
         creator.onShowingProperty.add(function (_, options) {
+            if (config.propertyGrid)
             options.canShow = config.propertyGrid === true || (
                 Array.isArray(config.propertyGrid) 
                     && config.propertyGrid.indexOf(options.property.name) > -1
@@ -125,6 +119,16 @@ const FormBuilder: FC = () => {
                 });
             }
         });
+
+        creator.saveSurveyFunc = (saveNo: number) => { // TODO: finish implementation
+            config.value = JSON.stringify(creator.text);
+            if (config.scriptNames?.autoSave) {
+                performScript(config.scriptNames.autoSave, {
+                    value: creator.text,
+                    saveNo: saveNo,
+                });
+            }
+        }
     }
 
     return <SurveyCreatorComponent creator={creator} />;
