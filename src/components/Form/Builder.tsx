@@ -90,12 +90,25 @@ const FormBuilder: FC = () => {
     
     if (creator) {
         // Show only the selected properties in the property grid
-        creator.onShowingProperty.add(function (_, options) {
-            if (config.propertyGrid)
-            options.canShow = config.propertyGrid === true || (
-                Array.isArray(config.propertyGrid) 
-                    && config.propertyGrid.indexOf(options.property.name) > -1
-            );
+        // creator.onShowingProperty.add(function (_, options) {
+        //     if (config.propertyGrid)
+        //     options.canShow = config.propertyGrid === true || (
+        //         Array.isArray(config.propertyGrid) 
+        //             && config.propertyGrid.indexOf(options.property.name) > -1
+        //     );
+        // });
+
+        creator.onSurveyInstanceCreated.add((_, { area, obj, survey }) => {
+            if (area === "property-grid" && config.propertyGrid && Array.isArray(config.propertyGrid)) {
+                console.log(survey.getAllPanels().map((panel: any) => panel.jsonObj.name));
+
+                config.propertyGrid.map((type) => {
+                    const hideCategory = survey.getPageByName(type) || survey.getPanelByName(type);
+                    if (hideCategory) {
+                        hideCategory.delete();
+                    }
+                });
+            }
         });
 
         // Set default values for pages
@@ -112,7 +125,13 @@ const FormBuilder: FC = () => {
         // Set default values for questions
         creator.onQuestionAdded.add((_, options) => {
             const question = options.question;
-          
+
+            // TODO: endre spørsmålsnavn til Caption01 etc
+
+            // Skjule spørsmålnavn, valg fra web, data, validering, språkvalg, json
+
+            // Er nødvendig sende når lagres
+
             if (config.defaultValues?.question) {
                 Object.entries(config.defaultValues.question).forEach(([key, value]) => {
                     question[key] = value;
