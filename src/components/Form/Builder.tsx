@@ -100,6 +100,7 @@ const FormBuilder: FC = () => {
         creator.onSurveyInstanceCreated.add((_, { area, obj, survey }) => {
             if (area === "property-grid" && config.propertyGridTabs && Array.isArray(config.propertyGridTabs)) {
                 console.log(survey.getAllPanels().map((panel: any) => panel.jsonObj.name));
+                console.log(survey.getAllPanels().map((panel: any) => panel.jsonObj.elements));
 
                 config.propertyGridTabs.map((type) => {
                     const hideCategory = survey.getPanelByName(type);
@@ -130,6 +131,10 @@ const FormBuilder: FC = () => {
             // Skjule spørsmålnavn, valg fra web, data, validering, språkvalg, json
 
             // Er nødvendig sende når lagres
+
+            //"locale" "mode" "cookieName" "showNavigationButtons" (hele nav siden?) "questionsOrder" "timeLimit"
+
+            // Hide navigation buttons / bare complete button
 
             if (config.defaultValues?.question) {
                 Object.entries(config.defaultValues.question).forEach(([key, value]) => {

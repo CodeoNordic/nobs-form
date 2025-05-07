@@ -5,7 +5,7 @@ import { warn } from '@utils/log';
 const defaultConfig: Partial<Form.Config> = {
     locale: 'no',
     questionTypes: true,
-    propertyGrid: true,
+    propertyGridTabs: true,
     tabs: true,
     isAutoSave: true
 };
