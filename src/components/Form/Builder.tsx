@@ -5,6 +5,7 @@ import "survey-creator-core/i18n";
 import { useMemo } from "react";
 import { Serializer } from "survey-core";
 import performScript from "@utils/performScript";
+import { warn } from "@utils/log";
 
 const FormBuilder: FC = () => {
     const config = useConfig();
@@ -90,20 +91,18 @@ const FormBuilder: FC = () => {
     
     if (creator) {
         // Show only the selected properties in the property grid
-        // creator.onShowingProperty.add(function (_, options) {
-        //     if (config.propertyGrid)
-        //     options.canShow = config.propertyGrid === true || (
-        //         Array.isArray(config.propertyGrid) 
-        //             && config.propertyGrid.indexOf(options.property.name) > -1
-        //     );
-        // });
+        creator.onShowingProperty.add(function (_, options) {
+            if (config.questionPropertyGrid) {
+                options.canShow = config.questionPropertyGrid.indexOf(options.property.name)=== -1;        
+            }
+        });
 
         creator.onSurveyInstanceCreated.add((_, { area, obj, survey }) => {
-            if (area === "property-grid" && config.propertyGrid && Array.isArray(config.propertyGrid)) {
+            if (area === "property-grid" && config.propertyGridTabs && Array.isArray(config.propertyGridTabs)) {
                 console.log(survey.getAllPanels().map((panel: any) => panel.jsonObj.name));
 
-                config.propertyGrid.map((type) => {
-                    const hideCategory = survey.getPageByName(type) || survey.getPanelByName(type);
+                config.propertyGridTabs.map((type) => {
+                    const hideCategory = survey.getPanelByName(type);
                     if (hideCategory) {
                         hideCategory.delete();
                     }

@@ -18,13 +18,17 @@ declare global {
             validateFromFileMaker?: boolean;
 
             // The types of questions that can be added to the form
-            // True to show all, false to show none, or an array of types to show
-            questionTypes?: boolean|string[];
+            // True to show all, false to show none, or an array of types to hide 
+            questionTypes?: boolean|string[]; // TODO: convert from show to hide
 
-            // The options to show in the sidemenu to the right when editing a question
-            // True to show all, false to show none, or an array of options to show
-            propertyGrid?: boolean|string[];
-            
+            // The tabs to show in the sidemenu to the right when editing a question
+            // True to show all, false to show none, or an array of tabs to hide
+            propertyGridTabs?: boolean|string[];
+
+            // The options to show in the tabs in the sidemenu to the right when editing a question
+            // An array of options to hide
+            questionPropertyGrid?: string[];
+
             // Whether the form should autosave on edit or not
             isAutoSave?: boolean;
 
