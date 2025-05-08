@@ -29,6 +29,9 @@ declare global {
             // An array of options to hide
             questionPropertyGrid?: string[];
 
+            // If the complete button should be shown or not
+            hideCompleteButton?: boolean;
+
             // Whether the form should autosave on edit or not
             isAutoSave?: boolean;
 

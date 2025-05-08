@@ -56,14 +56,19 @@ const FormBuilder: FC = () => {
     
         const newCreator = new SurveyCreator(creatorOptions);
 
-        const validatedQuestionTypes = Array.isArray(config.questionTypes) 
-            && config.questionTypes.length > 0
-                ? config.questionTypes 
-                : [];
+        newCreator.survey.onAfterRenderSurvey.add((s) => { s.navigationBar.getActionById("sv-nav-complete").visible = false; });
 
-        validatedQuestionTypes.forEach((type) => {
-            newCreator.toolbox.removeItem(type);
-        });
+        if (config.questionTypes !== undefined) {
+            if (Array.isArray(config.questionTypes)) {
+                // Hide question types in array
+                config.questionTypes.forEach((type) => {
+                    newCreator.toolbox.removeItem(type);
+                });
+            } else if (config.questionTypes === false) {
+                // Hide all question types
+                newCreator.toolbox.clearItems();
+            }
+        }
         
         // Hide options in property grid
         if (config.questionPropertyGrid) {
@@ -90,11 +95,8 @@ const FormBuilder: FC = () => {
         } else if (typeof config.propertyGridTabs === "boolean" && !config.propertyGridTabs) {
             newCreator.showPropertyGrid = false;
         }
-
-        // Hide question types if set to false or empty array
-        if (config.questionTypes === false || (Array.isArray(config.questionTypes) && config.questionTypes.length === 0)) {
-            newCreator.toolbox.clearItems();
-        }
+       
+        
 
         if (config.value) {
             const surveyJson = JSON.parse(config.value);
@@ -105,7 +107,8 @@ const FormBuilder: FC = () => {
                 completedHtml: "<h3>Takk for at du utførte undersøkelsen</h3>",
                 completedBeforeHtml: "<h3>Du har allerede gjort ferdig undersøkelsen</h3>",
                 loadingHtml: "<h3>Laster undersøkelse...</h3>",
-                completeText: "Fullfør"
+                completeText: "Fullfør",
+                showCompletePage: false,
             } : {};
 
             if (config.defaultValues?.survey) {
@@ -136,13 +139,7 @@ const FormBuilder: FC = () => {
 
             // TODO: endre spørsmålsnavn til Caption01 etc
 
-            // Skjule spørsmålnavn, valg fra web, data, validering, språkvalg, json
-
             // Er nødvendig sende når lagres
-
-            //"locale" "mode" "cookieName" "showNavigationButtons" (hele nav siden?) "questionsOrder" "timeLimit"
-
-            // Hide navigation buttons / bare complete button
 
             if (config.defaultValues?.question) {
                 Object.entries(config.defaultValues.question).forEach(([key, value]) => {
@@ -151,7 +148,19 @@ const FormBuilder: FC = () => {
             }
         });
 
-        creator.saveSurveyFunc = (saveNo: number) => { // TODO: finish implementation
+        if (config.hideCompleteButton) {
+            creator.onSurveyInstanceCreated.add(function(_, options) {
+                if(options.reason == "test") {
+                    const completeAction = options.survey.navigationBar.getActionById("sv-nav-complete");
+                    completeAction.visible = false;
+                    options.survey.onCurrentPageChanged.add(() => {
+                        completeAction.visible = false;
+                    });
+                }
+            });
+        }
+
+        creator.saveSurveyFunc = (saveNo: number) => {
             config.value = JSON.stringify(creator.text);
             if (config.scriptNames?.autoSave) {
                 performScript(config.scriptNames.autoSave, {
