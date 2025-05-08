@@ -27,14 +27,8 @@ const FormBuilder: FC = () => {
             // TODO: Add required before sending or something
         }
 
-        const validatedQuestionTypes = Array.isArray(config.questionTypes) 
-            && config.questionTypes.length > 0
-                ? config.questionTypes 
-                : [];
-
         const creatorOptions = {
             isAutoSave: config.isAutoSave,
-            questionTypes: validatedQuestionTypes,
             ...(
                 typeof config.tabs == "boolean" ? {
                     showLogicTab: config.tabs,
@@ -62,6 +56,41 @@ const FormBuilder: FC = () => {
     
         const newCreator = new SurveyCreator(creatorOptions);
 
+        const validatedQuestionTypes = Array.isArray(config.questionTypes) 
+            && config.questionTypes.length > 0
+                ? config.questionTypes 
+                : [];
+
+        validatedQuestionTypes.forEach((type) => {
+            newCreator.toolbox.removeItem(type);
+        });
+        
+        // Hide options in property grid
+        if (config.questionPropertyGrid) {
+            newCreator.onShowingProperty.add((_, options) => {
+                options.canShow = config.questionPropertyGrid!.indexOf(options.property.name)=== -1;    
+            });
+        }
+
+        // Hide tabs in list
+        if (config.propertyGridTabs && Array.isArray(config.propertyGridTabs)) {
+            newCreator.onSurveyInstanceCreated.add((_, { area, obj, survey }) => {
+                if (area === "property-grid") {
+                    console.log(survey.getAllPanels().map((panel: any) => panel.jsonObj.name));
+                    console.log(survey.getAllPanels().map((panel: any) => panel.jsonObj.elements));
+
+                    (config.propertyGridTabs as string[]).map((type) => {
+                        const hideCategory = survey.getPanelByName(type);
+                        if (hideCategory) {
+                            hideCategory.delete();
+                        }
+                    });
+                }
+            });
+        } else if (typeof config.propertyGridTabs === "boolean" && !config.propertyGridTabs) {
+            newCreator.showPropertyGrid = false;
+        }
+
         // Hide question types if set to false or empty array
         if (config.questionTypes === false || (Array.isArray(config.questionTypes) && config.questionTypes.length === 0)) {
             newCreator.toolbox.clearItems();
@@ -87,30 +116,9 @@ const FormBuilder: FC = () => {
         }
 
         return newCreator;
-    }, [config.locale, config.questionTypes, config.tabs]); // Add deps that should trigger a re-render
+    }, [config.locale, config.questionTypes, config.tabs, config.propertyGridTabs, config.questionPropertyGrid]); // Add deps that should trigger a re-render
     
     if (creator) {
-        // Show only the selected properties in the property grid
-        creator.onShowingProperty.add(function (_, options) {
-            if (config.questionPropertyGrid) {
-                options.canShow = config.questionPropertyGrid.indexOf(options.property.name)=== -1;        
-            }
-        });
-
-        creator.onSurveyInstanceCreated.add((_, { area, obj, survey }) => {
-            if (area === "property-grid" && config.propertyGridTabs && Array.isArray(config.propertyGridTabs)) {
-                console.log(survey.getAllPanels().map((panel: any) => panel.jsonObj.name));
-                console.log(survey.getAllPanels().map((panel: any) => panel.jsonObj.elements));
-
-                config.propertyGridTabs.map((type) => {
-                    const hideCategory = survey.getPanelByName(type);
-                    if (hideCategory) {
-                        hideCategory.delete();
-                    }
-                });
-            }
-        });
-
         // Set default values for pages
         creator.onPageAdded.add(function (_, options) {
             const page = options.page;
