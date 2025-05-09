@@ -5,7 +5,6 @@ import "survey-creator-core/i18n";
 import { useMemo } from "react";
 import { Serializer } from "survey-core";
 import performScript from "@utils/performScript";
-import { warn } from "@utils/log";
 
 const FormBuilder: FC = () => {
     const config = useConfig();
@@ -81,9 +80,6 @@ const FormBuilder: FC = () => {
         if (config.propertyGridTabs && Array.isArray(config.propertyGridTabs)) {
             newCreator.onSurveyInstanceCreated.add((_, { area, obj, survey }) => {
                 if (area === "property-grid") {
-                    console.log(survey.getAllPanels().map((panel: any) => panel.jsonObj.name));
-                    console.log(survey.getAllPanels().map((panel: any) => panel.jsonObj.elements));
-
                     (config.propertyGridTabs as string[]).map((type) => {
                         const hideCategory = survey.getPanelByName(type);
                         if (hideCategory) {
@@ -95,8 +91,6 @@ const FormBuilder: FC = () => {
         } else if (typeof config.propertyGridTabs === "boolean" && !config.propertyGridTabs) {
             newCreator.showPropertyGrid = false;
         }
-       
-        
 
         if (config.value) {
             const surveyJson = JSON.parse(config.value);
@@ -108,7 +102,6 @@ const FormBuilder: FC = () => {
                 completedBeforeHtml: "<h3>Du har allerede gjort ferdig undersøkelsen</h3>",
                 loadingHtml: "<h3>Laster undersøkelse...</h3>",
                 completeText: "Fullfør",
-                showCompletePage: false,
             } : {};
 
             if (config.defaultValues?.survey) {
@@ -137,9 +130,14 @@ const FormBuilder: FC = () => {
         creator.onQuestionAdded.add((_, options) => {
             const question = options.question;
 
-            // TODO: endre spørsmålsnavn til Caption01 etc
-
             // Er nødvendig sende når lagres
+            
+            // TODO: endre spørsmålsnavn til Caption01 etc
+            
+            const questionNumber = question.name.match(/[0-9]+/g);
+
+
+            console.log(options.question.name, options.question.getType(),questionNumber);
 
             if (config.defaultValues?.question) {
                 Object.entries(config.defaultValues.question).forEach(([key, value]) => {
