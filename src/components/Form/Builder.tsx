@@ -134,11 +134,6 @@ const FormBuilder: FC = () => {
             
             // TODO: endre spørsmålsnavn til Caption01 etc
             
-            const questionNumber = question.name.match(/[0-9]+/g);
-
-
-            console.log(options.question.name, options.question.getType(),questionNumber);
-
             if (config.defaultValues?.question) {
                 Object.entries(config.defaultValues.question).forEach(([key, value]) => {
                     question[key] = value;
@@ -164,7 +159,7 @@ const FormBuilder: FC = () => {
                 performScript(config.scriptNames.autoSave, {
                     value: creator.text,
                     saveNo: saveNo,
-                });
+                }, undefined, true);
             }
         }
     }
