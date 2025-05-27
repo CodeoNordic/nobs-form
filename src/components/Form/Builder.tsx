@@ -54,11 +54,6 @@ const FormBuilder: FC = () => {
         surveyLocalization.defaultLocale = config.locale;
         surveyLocalization.currentLocale = config.locale;
         surveyLocalization.supportedLocales = ["no", "en"];
-    
-        console.log(
-            surveyLocalization.locales,
-            editorLocalization.locales
-        )
 
         if (config.locale === "no") {
             // Some custom localizations for Norwegian
@@ -190,8 +185,44 @@ const FormBuilder: FC = () => {
             const question = options.question;
 
             // Er nødvendig sende når lagres
+
+            const getNestedQuestions = (elements: any[]) => {
+                let nestedQuestions: any[] = [];
+
+                elements.forEach((el) => { 
+                    if (el.elements) {
+                        nestedQuestions = nestedQuestions.concat(getNestedQuestions(el.elements));
+                    } else {
+                        nestedQuestions.push(el);
+                    } 
+                });
+
+                return nestedQuestions;
+            };
+
+            const questions: any[] = [];
+            const survey = JSON.parse(config.value || "{}");
+
+            console.log("Survey JSON", survey);
+
+            survey?.pages?.forEach((page: any) => {
+                questions.push(...getNestedQuestions(page.elements));
+            });
+
+            const highestIndex = questions.reduce((max, q) => {
+                const index = parseInt(q.name.replace(/^\D+/g, '')) || 0; // Extract numeric part from name
+                return Math.max(max, index);
+            }, 0);
+
+            console.log("Highest question index", highestIndex);
+
+            console.log("Questions in survey", questions);
             
             // TODO: endre spørsmålsnavn til Caption01 etc
+            const num = (highestIndex + 1).toString().padStart(2, '0');
+            question.name = `Caption${num}`;
+
+            console.log("Question added", question.name, question);
             
             if (config.defaultValues?.question) {
                 Object.entries(config.defaultValues.question).forEach(([key, value]) => {
@@ -213,7 +244,7 @@ const FormBuilder: FC = () => {
         }
 
         creator.saveSurveyFunc = (saveNo: number) => {
-            config.value = JSON.stringify(creator.text);
+            config.value = creator.text;
             if (config.scriptNames?.autoSave) {
                 performScript(config.scriptNames.autoSave, {
                     value: creator.text,
