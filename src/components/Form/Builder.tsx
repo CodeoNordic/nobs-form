@@ -98,16 +98,18 @@ const FormBuilder: FC = () => {
             (editorLocalization.locales as any)["nb"].triggers.completetrigger = "fullføre undersøkelse";
             (editorLocalization.locales as any)["nb"].triggers.setvaluetrigger = "sett verdi";
             (editorLocalization.locales as any)["nb"].triggers.copyvaluetrigger = "kopier verdi";
-
             (editorLocalization.locales as any)["nb"].pv.backgroundImageFit = {
                 auto: "Auto",
                 cover: "Dekk", 
                 contain: "Tilpass",
                 fill: "Fyll",
                 tile: "Flislegg" 
-            }
-            (editorLocalization.locales as any)["nb"].pehelp.logofit = "TODO: fix"
-                    
+            };
+            (editorLocalization.locales as any)["nb"].pv.cover = "Dekk";
+            (editorLocalization.locales as any)["nb"].pv.contain = "Tilpass";
+            (editorLocalization.locales as any)["nb"].pv.fill = "Fyll";
+            (editorLocalization.locales as any)["nb"].pehelp.logofit = "Velg mellom: \"Ingen\" - bildet opprettholder sin opprinnelige størrelse; \"Tilpass\" - bildet endres for å passe samtidig som størrelsesforholdet opprettholdes; \"Dekk\" - bildet fyller hele boksen mens du opprettholder størrelsesforholdet; \"Fyll\" - bildet strekkes for å fylle boksen uten å opprettholde størrelsesforholdet.";
+            (editorLocalization.locales as any)["nb"].pehelp.imageFit = "Velg mellom: \"Ingen\" - bildet opprettholder sin opprinnelige størrelse; \"Tilpass\" - bildet endres for å passe samtidig som størrelsesforholdet opprettholdes; \"Dekk\" - bildet fyller hele boksen mens du opprettholder størrelsesforholdet; \"Fyll\" - bildet strekkes for å fylle boksen uten å opprettholde størrelsesforholdet.";
         }
 
         const newCreator = new SurveyCreator(creatorOptions);
