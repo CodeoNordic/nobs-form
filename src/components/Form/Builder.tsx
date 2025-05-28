@@ -184,8 +184,6 @@ const FormBuilder: FC = () => {
         creator.onQuestionAdded.add((_, options) => {
             const question = options.question;
 
-            // Er nødvendig sende når lagres
-
             const getNestedQuestions = (elements: any[]) => {
                 let nestedQuestions: any[] = [];
 
@@ -203,26 +201,17 @@ const FormBuilder: FC = () => {
             const questions: any[] = [];
             const survey = JSON.parse(config.value || "{}");
 
-            console.log("Survey JSON", survey);
-
             survey?.pages?.forEach((page: any) => {
                 questions.push(...getNestedQuestions(page.elements));
             });
 
             const highestIndex = questions.reduce((max, q) => {
-                const index = parseInt(q.name.replace(/^\D+/g, '')) || 0; // Extract numeric part from name
+                const index = parseInt(q.name.replace(/^\D+/g, '')) || 0; // Extract number from name
                 return Math.max(max, index);
             }, 0);
 
-            console.log("Highest question index", highestIndex);
-
-            console.log("Questions in survey", questions);
-            
-            // TODO: endre spørsmålsnavn til Caption01 etc
             const num = (highestIndex + 1).toString().padStart(2, '0');
             question.name = `Caption${num}`;
-
-            console.log("Question added", question.name, question);
             
             if (config.defaultValues?.question) {
                 Object.entries(config.defaultValues.question).forEach(([key, value]) => {
