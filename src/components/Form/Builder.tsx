@@ -198,21 +198,22 @@ const FormBuilder: FC = () => {
                 return nestedQuestions;
             };
 
-            const questions: any[] = [];
-            const survey = JSON.parse(config.value || "{}");
+            if (!question.name.includes("Caption")) {
+                const questions: any[] = [];
+                const survey = JSON.parse(config.value || "{}");
 
-            survey?.pages?.forEach((page: any) => {
-                questions.push(...getNestedQuestions(page.elements));
-            });
+                survey?.pages?.forEach((page: any) => {
+                    questions.push(...getNestedQuestions(page.elements));
+                });
 
-            const highestIndex = questions.reduce((max, q) => {
-                const index = parseInt(q.name.replace(/^\D+/g, '')) || 0; // Extract number from name
-                return Math.max(max, index);
-            }, 0);
+                const highestIndex = questions.reduce((max, q) => {
+                    const index = parseInt(q.name.replace(/^\D+/g, '')) || 0; // Extract number from name
+                    return Math.max(max, index);
+                }, 0);
 
-            const num = (highestIndex + 1).toString().padStart(2, '0');
-            question.name = `Caption${num}`;
-            
+                const num = (highestIndex + 1).toString().padStart(2, '0');
+                question.name = `Caption${num}`;    
+            }
             if (config.defaultValues?.question) {
                 Object.entries(config.defaultValues.question).forEach(([key, value]) => {
                     question[key] = value;
