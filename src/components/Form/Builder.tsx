@@ -4,9 +4,8 @@ import { useConfig } from "@context/Config";
 import "survey-creator-core/i18n/norwegian";
 import "survey-core/i18n/norwegian";
 import { useMemo } from "react";
-import { getLocaleString, Serializer } from "survey-core";
+import { Serializer } from "survey-core";
 import performScript from "@utils/performScript";
-import { getLocString } from "survey-creator-core";
 
 const FormBuilder: FC = () => {
     const config = useConfig();
@@ -35,13 +34,11 @@ const FormBuilder: FC = () => {
                     showLogicTab: config.tabs,
                     showJSONEditorTab: config.tabs,
                     showTestSurveyTab: config.tabs
-                } : ( 
-                    {
-                        showLogicTab: config.tabs.includes("logic"),
-                        showJSONEditorTab: config.tabs.includes("json"),
-                        showTestSurveyTab: config.tabs.includes("preview")
-                    }
-                )
+                } : {
+                    showLogicTab: config.tabs.includes("logic"),
+                    showJSONEditorTab: config.tabs.includes("json"),
+                    showTestSurveyTab: config.tabs.includes("preview")
+                }
             )
         };
 
@@ -113,7 +110,7 @@ const FormBuilder: FC = () => {
 
         if (config.questionTypes !== undefined) {
             if (Array.isArray(config.questionTypes)) {
-                // Hide question types in array
+                // Hide question types listed in config
                 config.questionTypes.forEach((type) => {
                     newCreator.toolbox.removeItem(type);
                 });
@@ -166,7 +163,13 @@ const FormBuilder: FC = () => {
         }
 
         return newCreator;
-    }, [config.locale, config.questionTypes, config.tabs, config.propertyGridTabs, config.questionPropertyGrid]); // Add deps that should trigger a re-render
+    }, [
+        config.locale, 
+        config.questionTypes, 
+        config.tabs, 
+        config.propertyGridTabs, 
+        config.questionPropertyGrid
+    ]); // Add deps that should trigger a re-render
     
     if (creator) {
         // Set default values for pages
