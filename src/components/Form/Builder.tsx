@@ -52,6 +52,8 @@ const FormBuilder: FC = () => {
         surveyLocalization.currentLocale = config.locale;
         surveyLocalization.supportedLocales = ["no", "en"];
 
+        console.log((editorLocalization.locales as any)["nb"]) // TODO: Change "Rullegardinmenyen" to "Nedtrekksmeny" in Norwegian
+
         if (config.locale === "no") {
             // Some custom localizations for Norwegian
             (editorLocalization.locales as any)["nb"].qt.boolean = "Ja/Nei";
