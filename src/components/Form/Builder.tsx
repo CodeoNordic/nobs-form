@@ -24,7 +24,6 @@ const FormBuilder: FC = () => {
                 category: "validation",
                 type: "boolean",
             });
-            // TODO: Add required before sending or something
         }
 
         const creatorOptions = {
@@ -239,6 +238,8 @@ const FormBuilder: FC = () => {
         }
 
         creator.saveSurveyFunc = (saveNo: number) => {
+            console.log("Saving survey", saveNo);
+
             config.value = creator.text;
             if (config.scriptNames?.autoSave) {
                 performScript(config.scriptNames.autoSave, {
