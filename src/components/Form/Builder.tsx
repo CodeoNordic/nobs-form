@@ -51,13 +51,14 @@ const FormBuilder: FC = () => {
         surveyLocalization.currentLocale = config.locale;
         surveyLocalization.supportedLocales = ["no", "en"];
 
-        console.log((editorLocalization.locales as any)["nb"]) // TODO: Change "Rullegardinmenyen" to "Nedtrekksmeny" in Norwegian
-
         if (config.locale === "no") {
             // Some custom localizations for Norwegian
             (editorLocalization.locales as any)["nb"].qt.boolean = "Ja/Nei";
+            (editorLocalization.locales as any)["nb"].qt.tagbox = "Rullegardinmeny med flere valg";
             (editorLocalization.locales as any)["nb"].pe.labelTrue = "\"Ja\" etikett";
             (editorLocalization.locales as any)["nb"].pe.labelFalse = "\"Nei\" etikett";
+            (editorLocalization.locales as any)["nb"].pe.question.name = "Spørsmålsnavn";
+            (editorLocalization.locales as any)["nb"].pe.question.title = "Spørsmålstittel";
             (editorLocalization.locales as any)["nb"].pv.inputType.number = "Tall";
             (editorLocalization.locales as any)["nb"].pv.hidden = "Skjult";
             (editorLocalization.locales as any)["nb"].pv.hide = "Skjul";
