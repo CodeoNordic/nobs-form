@@ -4,6 +4,9 @@ declare global {
             // The form data, in json format
             value?: string;
 
+            // The license key for the survey creator
+            licenseKey?: string;
+
             // If the form should be compact or not
             compact?: boolean;
 

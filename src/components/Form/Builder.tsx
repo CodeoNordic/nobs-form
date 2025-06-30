@@ -4,13 +4,18 @@ import { useConfig } from "@context/Config";
 import "survey-creator-core/i18n/norwegian";
 import "survey-core/i18n/norwegian";
 import { useMemo } from "react";
-import { Serializer } from "survey-core";
+import { Serializer, slk } from "survey-core";
 import performScript from "@utils/performScript";
 
 const FormBuilder: FC = () => {
     const config = useConfig();
 
     if (!config) return null;
+
+    if (config.licenseKey) {
+        // Set the license key for the survey creator
+        slk(config.licenseKey);
+    }
 
     // useMemo so you can choose when to re-render
     const creator = useMemo(() => {
