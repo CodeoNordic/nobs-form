@@ -91,12 +91,9 @@ const FormBuilder: FC = () => {
             (editorLocalization.locales as any)["nb"].pv.showAllQuestions = "Vis alle spørsmål";
             (editorLocalization.locales as any)["nb"].pv.showAnsweredQuestions = "Vis besvarte spørsmål";
             (editorLocalization.locales as any)["nb"].pv.underRowSingle = "Under raden, bare ett panel er synlig";
-            (editorLocalization.locales as any)["nb"].p.navigationButtonsVisibility = "Navigasjonsknapper synlighet";
-            (editorLocalization.locales as any)["nb"].p.validators = "Valideringsalternativer";
-            (editorLocalization.locales as any)["nb"].p.choices = "Alternativer";
-            (editorLocalization.locales as any)["nb"].triggers.completetrigger = "fullføre undersøkelse";
-            (editorLocalization.locales as any)["nb"].triggers.setvaluetrigger = "sett verdi";
-            (editorLocalization.locales as any)["nb"].triggers.copyvaluetrigger = "kopier verdi";
+            (editorLocalization.locales as any)["nb"].pv.cover = "Dekk";
+            (editorLocalization.locales as any)["nb"].pv.contain = "Tilpass";
+            (editorLocalization.locales as any)["nb"].pv.fill = "Fyll";
             (editorLocalization.locales as any)["nb"].pv.backgroundImageFit = {
                 auto: "Auto",
                 cover: "Dekk", 
@@ -104,9 +101,12 @@ const FormBuilder: FC = () => {
                 fill: "Fyll",
                 tile: "Flislegg" 
             };
-            (editorLocalization.locales as any)["nb"].pv.cover = "Dekk";
-            (editorLocalization.locales as any)["nb"].pv.contain = "Tilpass";
-            (editorLocalization.locales as any)["nb"].pv.fill = "Fyll";
+            (editorLocalization.locales as any)["nb"].p.navigationButtonsVisibility = "Navigasjonsknapper synlighet";
+            (editorLocalization.locales as any)["nb"].p.validators = "Valideringsalternativer";
+            (editorLocalization.locales as any)["nb"].p.choices = "Alternativer";
+            (editorLocalization.locales as any)["nb"].triggers.completetrigger = "fullføre undersøkelse";
+            (editorLocalization.locales as any)["nb"].triggers.setvaluetrigger = "sett verdi";
+            (editorLocalization.locales as any)["nb"].triggers.copyvaluetrigger = "kopier verdi";
             (editorLocalization.locales as any)["nb"].pehelp.logofit = "Velg mellom: \"Ingen\" - bildet opprettholder sin opprinnelige størrelse; \"Tilpass\" - bildet endres for å passe samtidig som størrelsesforholdet opprettholdes; \"Dekk\" - bildet fyller hele boksen mens du opprettholder størrelsesforholdet; \"Fyll\" - bildet strekkes for å fylle boksen uten å opprettholde størrelsesforholdet.";
             (editorLocalization.locales as any)["nb"].pehelp.imageFit = "Velg mellom: \"Ingen\" - bildet opprettholder sin opprinnelige størrelse; \"Tilpass\" - bildet endres for å passe samtidig som størrelsesforholdet opprettholdes; \"Dekk\" - bildet fyller hele boksen mens du opprettholder størrelsesforholdet; \"Fyll\" - bildet strekkes for å fylle boksen uten å opprettholde størrelsesforholdet.";
         }
