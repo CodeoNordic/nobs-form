@@ -1,11 +1,11 @@
 import { editorLocalization, SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
 import { surveyLocalization } from "survey-react-ui";
+import performScript from "@utils/performScript";
+import { Serializer, slk } from "survey-core";
 import { useConfig } from "@context/Config";
 import "survey-creator-core/i18n/norwegian";
 import "survey-core/i18n/norwegian";
 import { useMemo } from "react";
-import { Serializer, slk } from "survey-core";
-import performScript from "@utils/performScript";
 
 const FormBuilder: FC = () => {
     const config = useConfig();
@@ -181,11 +181,9 @@ const FormBuilder: FC = () => {
     if (creator) {
         // Set default values for pages
         creator.onPageAdded.add(function (_, options) {
-            const page = options.page;
-
-            if (page.elements.length === 0 && config.defaultValues?.page) {
+            if (options.page.elements.length === 0 && config.defaultValues?.page) {
                 Object.entries(config.defaultValues.page).forEach(([key, value]) => {
-                    (page as any)[key] = value;
+                    (options.page as any)[key] = value;
                 });
             }
         });
@@ -244,8 +242,6 @@ const FormBuilder: FC = () => {
         }
 
         creator.saveSurveyFunc = (saveNo: number) => {
-            console.log("Saving survey", saveNo);
-
             config.value = creator.text;
             if (config.scriptNames?.autoSave) {
                 performScript(config.scriptNames.autoSave, {
