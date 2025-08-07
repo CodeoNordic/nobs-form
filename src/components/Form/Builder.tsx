@@ -109,6 +109,7 @@ const FormBuilder: FC = () => {
             (editorLocalization.locales as any)["nb"].triggers.copyvaluetrigger = "kopier verdi";
             (editorLocalization.locales as any)["nb"].pehelp.logofit = "Velg mellom: \"Ingen\" - bildet opprettholder sin opprinnelige størrelse; \"Tilpass\" - bildet endres for å passe samtidig som størrelsesforholdet opprettholdes; \"Dekk\" - bildet fyller hele boksen mens du opprettholder størrelsesforholdet; \"Fyll\" - bildet strekkes for å fylle boksen uten å opprettholde størrelsesforholdet.";
             (editorLocalization.locales as any)["nb"].pehelp.imageFit = "Velg mellom: \"Ingen\" - bildet opprettholder sin opprinnelige størrelse; \"Tilpass\" - bildet endres for å passe samtidig som størrelsesforholdet opprettholdes; \"Dekk\" - bildet fyller hele boksen mens du opprettholder størrelsesforholdet; \"Fyll\" - bildet strekkes for å fylle boksen uten å opprettholde størrelsesforholdet.";
+            (editorLocalization.locales as any)["nb"].ed.lg.question_visibilityName = "Spørsmålssynlighet";
         }
 
         const newCreator = new SurveyCreator(creatorOptions);
