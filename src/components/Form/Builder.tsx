@@ -1,4 +1,4 @@
-import { editorLocalization, SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
+import { editorLocalization, settings, SurveyCreator, SurveyCreatorComponent, SurveyLogic } from "survey-creator-react";
 import { surveyLocalization } from "survey-react-ui";
 import performScript from "@utils/performScript";
 import { Serializer, slk } from "survey-core";
@@ -132,6 +132,14 @@ const FormBuilder: FC = () => {
         if (config.questionPropertyGrid) {
             newCreator.onShowingProperty.add((_, options) => {
                 options.canShow = config.questionPropertyGrid!.indexOf(options.property.name)=== -1;    
+            });
+        }
+
+        if (config.logicActions) {
+            SurveyLogic.types.forEach((type) => {
+                if (config.logicActions!.includes(type.name)) {
+                    type.showInUI = false;
+                }
             });
         }
 

@@ -28,6 +28,9 @@ declare global {
             // True to show all, false to show none, or an array of tabs to hide
             propertyGridTabs?: boolean|string[];
 
+            // An array of actions in the logic tab to hide
+            logicActions?: string[]; 
+
             // The options to show in the tabs in the sidemenu to the right when editing a question
             // An array of options to hide
             questionPropertyGrid?: string[];
